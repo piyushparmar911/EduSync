@@ -44,6 +44,17 @@ CREATE TABLE
         FOREIGN KEY (`ModuleId`) REFERENCES `Modules` (`Id`)
     );
 
+CREATE TABLE 
+`Departments` (
+    `Id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `Name` VARCHAR(255) NOT NULL,
+    `UserId` INT  NOT NULL,
+    `StartedYear` DATE NOT NULL,
+    `NoOfStudent` INT NOT NULL,
+    FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`)
+
+);
+
 CREATE TABLE
     `Class` (
         `Id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
