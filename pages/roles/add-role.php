@@ -32,17 +32,17 @@ include pathof("./includes/sidebar.php");
 <div class="col-12 col-sm-6">
 <div class="form-group">
 <label>Role ID</label>
-<input type="text" class="form-control">
+<input type="text" id="Id" hidden class="form-control">
 </div>
 </div>
 <div class="col-12 col-sm-6">
 <div class="form-group">
 <label>Role Name</label>
-<input type="text" class="form-control">
+<input type="text" id="Name" class="form-control">
 </div>
 </div>
 <div class="col-12">
-<button type="submit" class="btn btn-primary">Submit</button>
+<button type="submit" onclick="insert()" class="btn btn-primary">Submit</button>
 </div>
 </div>
 </form>
@@ -52,8 +52,36 @@ include pathof("./includes/sidebar.php");
 </div>
 </div>
 </div>
+</div> 
+<script>
+    function insert()
+    {
+        let Name= $('#Name').val();
 
-</div>
+        if (!Name.trim()) {
+            alert("Please enter module name first.");
+            return;
+        }
+
+        $.ajax({
+            url: '../../api/roles/insertRoles.php',
+            type: 'POST',
+            data: {
+                Name: Name
+            },
+            success: function(response){
+                console.log(response);
+                if(response)
+                {
+                    alert("inserted successfully");
+                } else {
+                    confirm("insert failed");
+                }
+            }
+        });
+    }
+</script>
+
 
 <?php
 include pathOf("./includes/footer.php");

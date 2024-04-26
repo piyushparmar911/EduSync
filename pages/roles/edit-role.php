@@ -32,17 +32,18 @@ include pathof("./includes/sidebar.php");
 <div class="col-12 col-sm-6">
 <div class="form-group">
 <label>Role ID</label>
-<input type="text" class="form-control" value="PRE1534">
+<input type="text" id="Id" class="form-control">
 </div>
 </div>
 <div class="col-12 col-sm-6">
 <div class="form-group">
 <label>Role Name</label>
-<input type="text" class="form-control" value="Botony">
+<input
+type="text" id="Name" class="form-control" value="Botony">
 </div>
 </div>
 <div class="col-12">
-<button type="submit" class="btn btn-primary">Submit</button>
+<button type="submit" onclick="update()" class="btn btn-primary">Submit</button>
 </div>
 </div>
 </form>
@@ -52,8 +53,38 @@ include pathof("./includes/sidebar.php");
 </div>
 </div>
 </div>
-
 </div>
+<script>
+    function update()
+    {
+        let Id = $('#Id');
+        let Name= $('#Name').val();
+
+        if (!Name.trim()) {
+            alert("Please enter module name first.");
+            return; // Stop further execution
+        }
+
+        $.ajax({
+            url: '../../api/roles/updateRoles.php',
+            type: 'POST',
+            data: {
+                Id: Id,
+                Name: Name
+            },
+            success: function(response){
+                console.log(response);
+                if(response)
+                {
+                    alert("updated successfully");
+                } else {
+                    confirm("insert failed");
+                }
+            }
+        });
+    }
+</script>
+
 <?php
 include pathOf("./includes/footer.php");
 include pathOf("./includes/pageend.php"); 

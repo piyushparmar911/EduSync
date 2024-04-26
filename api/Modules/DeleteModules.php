@@ -1,20 +1,17 @@
 <?php
-include ("../include.php");
+require '../../includes/init.php';
+$id = $_GET['id'];
 
+// Prepare the SQL query
+$query = "DELETE FROM `modules` WHERE `Id` = ?";
 
-$Id = $_POST['Id'];
+// Prepare parameters
+$param = [$id];
 
+// Execute the query
+$result = execute($query, $param);
 
-$query = "DELETE FROM `modules` WHERE   `Id` = ?";
-$param = [$Id];
-
-$statement = $connection->prepare($query);
-$data = $statement->execute($param);
-
-
-if($data)
-{
-    echo "deleted successfully";
+// Check if deletion was successful
+if($result) {
+    header("Location: ../../pages/modules/modules-list.php");
 }
-
-mysqli_close($connection);

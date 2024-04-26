@@ -32,36 +32,36 @@ include pathof("./includes/sidebar.php");
 <div class="col-12 col-sm-6">
 <div class="form-group">
 <label>Class ID</label>
-<input type="text" class="form-control">
+<input type="text" hidden class="form-control">
 </div>
 </div>
 <div class="col-12 col-sm-6">
 <div class="form-group">
 <label>Class Name</label>
-<input type="text" class="form-control">
+<input type="text" id="Name" class="form-control">
 </div>
 </div>
 
 <div class="col-12 col-sm-6">
 <div class="form-group">
 <label>Boys</label>
-<input type="number" class="form-control">
+<input type="number" id="Boys" class="form-control">
 </div>
 </div>
 <div class="col-12 col-sm-6">
 <div class="form-group">
 <label>Girls</label>
-<input type="number" class="form-control">
+<input type="number" id="Girls" class="form-control">
 </div>
 </div>
 
 <div class="col-12 col-sm-6">
 <div class="form-group">
 <label>Total student</label>
-<input type="number" class="form-control">
+<input type="number" id="TotalStudent" class="form-control">
 </div>
 <div class="col-12">
-<button type="submit" class="btn btn-primary">Submit</button>
+<button type="submit" onclick="insert()" class="btn btn-primary">Submit</button>
 </div>
 </div>
 </form>
@@ -71,8 +71,42 @@ include pathof("./includes/sidebar.php");
 </div>
 </div>
 </div>
-
 </div>
+<script>
+    function insert()
+    {
+        let Name= $('#Name').val();
+        let Boys = $('#Boys').val();
+        let Girls = $('#Girls').val();
+        let TotalStudent = $('#TotalStudent').val();
+
+        if (!Name.trim()) {
+            alert("Please enter class name first.");
+            return; 
+        }
+
+        $.ajax({
+            url: '../../api/class/insertClass.php',
+            type: 'POST',
+            data: {
+                Name: Name,
+                Boys: Boys,
+                Girls: Girls,
+                TotalStudent: TotalStudent
+            },
+            success: function(response){
+                console.log(response);
+                
+                if (!response)
+                    alert("Class not inserted successfully");
+                else
+                    alert("Class inserted successfully");
+            }
+        });
+    }
+</script>
+
+
 
 <?php
 include pathOf("./includes/footer.php");

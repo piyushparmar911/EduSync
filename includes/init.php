@@ -1,8 +1,8 @@
 
 <?php
 
-define("BASE_DIR", $_SERVER['DOCUMENT_ROOT'] . "/student management");
-define("BASE_URL", "/student management");
+define("BASE_DIR", $_SERVER['DOCUMENT_ROOT'] . "/EduSync");
+define("BASE_URL", "/EduSync");
 
 date_default_timezone_set('Asia/Kolkata');
 

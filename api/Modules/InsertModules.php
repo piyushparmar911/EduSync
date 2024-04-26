@@ -1,19 +1,16 @@
 <?php
 
-include ("../include.php");
+require '../../includes/init.php';
 
-    
-    $Name = $_POST['Name'];
-    $query = "INSERT INTO `modules` (`Name`) VALUES (?)";
-    $param = [$Name]; 
 
-$statement = $connection->prepare($query);
-$data = $statement->execute($param);
+$Name = $_POST['Name'];
 
-if($data)
+$query = "INSERT INTO `modules` (`Name`) VALUES (?)";
+$param = [$Name];
+
+$result = execute($query,$param);
+
+if($result)
 {
-    echo "Inserted";
+    echo "inserted successfully";
 }
-
-
-mysqli_close($connection);
