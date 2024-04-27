@@ -6,11 +6,7 @@ include pathof("./includes/sidebar.php");
 
 $query = "SELECT * FROM `modules`";
 
-$statement = $connection->prepare($query);
-$statement->execute();
-
-
-$data = $statement->fetchAll(PDO::FETCH_ASSOC);
+$data = select($query);
 ?>
 
 <div class="page-wrapper">

@@ -69,6 +69,7 @@ include pathof("./includes/sidebar.php");
                     alert("Module not inserted successfully");
                 else
                     alert("Module inserted successfully");
+                    window.location.href = 'modules-list.php';
             }
         });
     }

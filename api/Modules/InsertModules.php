@@ -9,8 +9,3 @@ $query = "INSERT INTO `modules` (`Name`) VALUES (?)";
 $param = [$Name];
 
 $result = execute($query,$param);
-
-if($result)
-{
-    echo "inserted successfully";
-}

@@ -11,7 +11,3 @@ $param = [$Name,$Id];
 
 $result = execute($query,$param);
 
-if($result)
-{
-    echo "updated successfully";
-}
