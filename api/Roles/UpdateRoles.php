@@ -1,22 +1,17 @@
 <?php
 
 
-include ("../include.php");
+require '../../includes/init.php';
 
 $Id = $_POST['Id'];
 $Name = $_POST['Name'];
-$ModuleId = $_POST['ModuleId'];
 
-$query = "UPDATE `roles` SET `Name` = ? , `ModuleId` = ? WHERE `Id` = ?";
-$param = [$Name,$ModuleId,$Id];
+$query = "UPDATE `roles` SET `Name` = ?  WHERE `id` = ?";
 
-$statement = $connection->prepare($query);
-$data = $statement->execute($param);
+$result = execute($query,[$Name,$Id]);
 
-
-if($data)
+if($result)
 {
-    echo "updated successfully";
+    echo "updated";
 }
 
-mysqli_close($connection);

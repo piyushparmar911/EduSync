@@ -2,6 +2,11 @@
 require ("../../includes/init.php");
 include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
+
+
+$query = "SELECT * FROM `roles`";
+
+$data = select($query);
 ?>
 
          <div class="page-wrapper">
@@ -16,7 +21,6 @@ include pathof("./includes/sidebar.php");
                         </ul>
                      </div>
                      <div class="col-auto text-right float-right ml-auto">
-                        <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
                         <a href="add-role.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                      </div>
                   </div>
@@ -29,120 +33,36 @@ include pathof("./includes/sidebar.php");
                               <table class="table table-hover table-center mb-0 datatable">
                                  <thead>
                                     <tr>
-                                       <th>Role Id</th>
+                                       <th>Sr No</th>
                                        <th>Role Name</th>
-                                       <th class="text-right">Action</th>
+                                       <th>Modify</th>
+                                       <th>Delete</th>
                                     </tr>
                                  </thead>
                                  <tbody>
+                                    <?php foreach($data as $row){?>
                                     <tr>
-                                       <td>PRE2209</td>
+                                       <td><?=$row['Id']?></td>
                                        <td>
                                           <h2>
-                                             <a>Mathematics</a>
+                                             <a><?=$row['Name']?></a>
                                           </h2>
                                        </td>
-                                       <td class="text-right">
-                                          <div class="actions">
-                                             <a href="edit-role.php" class="btn btn-sm bg-success-light mr-2">
-                                             <i class="fas fa-pen"></i>
-                                             </a>
-                                             <a href="#" class="btn btn-sm bg-danger-light">
-                                             <i class="fas fa-trash"></i>
-                                             </a>
-                                          </div>
-                                       </td>
+                                          
+                                       <td class="text-left">
+                                            <a href="edit-role.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light ml-2">
+                                                <i class="fas fa-pen"></i>
+
+                                            </a>
+                                        </td>
+                                        <td class="text-left">
+                                            <a href="../../api/roles/deleteRoles.php?id=<?=$row['Id']?>" class="btn btn-sm bg-danger-light ml-1">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                       <td>PRE2213</td>
-                                       <td>
-                                          <h2>
-                                             <a>History</a>
-                                          </h2>
-                                       </td>
-                                       <td class="text-right">
-                                          <div class="actions">
-                                             <a href="edit-role.php" class="btn btn-sm bg-success-light mr-2">
-                                             <i class="fas fa-pen"></i>
-                                             </a>
-                                             <a href="#" class="btn btn-sm bg-danger-light">
-                                             <i class="fas fa-trash"></i>
-                                             </a>
-                                          </div>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td>PRE2143</td>
-                                       <td>
-                                          <h2>
-                                             <a>Science</a>
-                                          </h2>
-                                       </td>
-                                       <td class="text-right">
-                                          <div class="actions">
-                                             <a href="edit-role.php" class="btn btn-sm bg-success-light mr-2">
-                                             <i class="fas fa-pen"></i>
-                                             </a>
-                                             <a href="#" class="btn btn-sm bg-danger-light">
-                                             <i class="fas fa-trash"></i>
-                                             </a>
-                                          </div>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td>PRE2431</td>
-                                       <td>
-                                          <h2>
-                                             <a>Geography</a>
-                                          </h2>
-                                       </td>
-                                       <td class="text-right">
-                                          <div class="actions">
-                                             <a href="edit-role.php" class="btn btn-sm bg-success-light mr-2">
-                                             <i class="fas fa-pen"></i>
-                                             </a>
-                                             <a href="#" class="btn btn-sm bg-danger-light">
-                                             <i class="fas fa-trash"></i>
-                                             </a>
-                                          </div>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td>PRE1534</td>
-                                       <td>
-                                          <h2>
-                                             <a>Botony</a>
-                                          </h2>
-                                       </td>
-                                       <td class="text-right">
-                                          <div class="actions">
-                                             <a href="edit-role.php" class="btn btn-sm bg-success-light mr-2">
-                                             <i class="fas fa-pen"></i>
-                                             </a>
-                                             <a href="#" class="btn btn-sm bg-danger-light">
-                                             <i class="fas fa-trash"></i>
-                                             </a>
-                                          </div>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td>PRE2153</td>
-                                       <td>
-                                          <h2>
-                                             <a>English</a>
-                                          </h2>
-                                       </td>
-                                       <td class="text-right">
-                                          <div class="actions">
-                                             <a href="edit-role.php" class="btn btn-sm bg-success-light mr-2">
-                                             <i class="fas fa-pen"></i>
-                                             </a>
-                                             <a href="#" class="btn btn-sm bg-danger-light">
-                                             <i class="fas fa-trash"></i>
-                                             </a>
-                                          </div>
-                                       </td>
-                                    </tr>
+                                    <?php }?>
+                                    
                                  </tbody>
                               </table>
                            </div>

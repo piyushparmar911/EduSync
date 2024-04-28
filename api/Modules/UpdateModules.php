@@ -7,7 +7,6 @@ $Id = $_POST['Id'];
 $Name = $_POST['Name'];
 
 $query = "UPDATE `modules` SET `Name` = ? WHERE `id` = ?";
-$param = [$Name,$Id];
 
-$result = execute($query,$param);
+$result = execute($query,[$Name,$Id]);
 

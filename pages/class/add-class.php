@@ -98,9 +98,12 @@ include pathof("./includes/sidebar.php");
                 console.log(response);
                 
                 if (!response)
+                {
                     alert("Class not inserted successfully");
+                }
                 else
-                    alert("Class inserted successfully");
+                alert("Class inserted successfully");
+                window.location.href = 'class-list.php'; 
             }
         });
     }

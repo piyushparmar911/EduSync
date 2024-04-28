@@ -31,13 +31,13 @@ $data = selectOne($query);
                       <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="moduleName">Module Id</label>
-                            <input type="text" readonly class="form-control" id="Id" name="moduleId" value="<?=$data['Id'] ?>">
+                            <input type="number" readonly class="form-control" id="Id" name="moduleId" value="<?=$data['Id'] ?>">
                         </div>
                      </div>
                      <div class="col-12 col-sm-6">
                         <div class="form-group">
                             <label for="moduleName">Module Name</label>
-                            <input type="text" class="form-control" id="Name" value="<?=$data['Name']?>" name="moduleName">
+                            <input type="text" class="form-control" id="Name"  value="<?=$data['Name']?>" autofocus name="moduleName">
                             
                         </div>
                         </div>

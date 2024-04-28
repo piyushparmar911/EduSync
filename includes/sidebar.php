@@ -15,7 +15,7 @@
                         </ul>
                         
                      <li class="users">
-                        <a href="<?=urlOf("pages/users/user.php")?>" accesskey="u"><i class="fas fa-users"></i> <span> Users</span></a>
+                        <a href="<?=urlOf("pages/users/user-list.php")?>" accesskey="u"><i class="fas fa-users"></i> <span> Users</span></a>
                      </li>
                      <li class="Departments">
                         <a href="<?=urlOf("pages/department/departments.php")?>" accesskey="p"><i class="fas fa-building"></i><span>Departments </span></a>

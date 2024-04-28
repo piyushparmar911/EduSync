@@ -2,11 +2,11 @@
 require '../../includes/init.php';
 $id = $_GET['id'];
 
-$query = "DELETE FROM `modules` WHERE `Id` = ?";
+$query = "DELETE FROM `class` WHERE `Id` = ?";
 
 
 $result = execute($query,[$id]);
 
 if($result) {
-    header("Location: ../../pages/modules/modules-list.php");
+    header("Location: ../../pages/class/class-list.php");
 }

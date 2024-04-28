@@ -2,6 +2,9 @@
 require("../../includes/init.php");
 include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
+
+$query = "SELECT * FROM  `modules`";
+$data = select($query)
 ?>
 
 
@@ -31,18 +34,13 @@ include pathof("./includes/sidebar.php");
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Role ID</label>
-                                        <input type="text" id="Id" hidden class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
                                         <label>Role Name</label>
-                                        <input type="text" id="Name" class="form-control">
+                                        <input type="text" autofocus id="Name" class="form-control">
                                     </div>
                                 </div>
+                                
                                 <div class="col-12">
-                                    <button type="submit" onclick="insert()" class="btn btn-primary">Submit</button>
+                                    <button type="submit" onclick="insertdata()" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -54,8 +52,9 @@ include pathof("./includes/sidebar.php");
 </div>
 </div>
 <script>
-    function insert() {
+    function insertdata() {
         let Name = $('#Name').val();
+        let ModuleId = $('#ModuleId').val();
 
         if (!Name.trim()) {
             alert("Please enter module name first.");
@@ -66,14 +65,17 @@ include pathof("./includes/sidebar.php");
             url: '../../api/roles/insertRoles.php',
             type: 'POST',
             data: {
-                Name: Name
+                Name: Name,
+                ModuleId: ModuleId
+                
             },
             success: function(response) {
                 console.log(response);
-                if (response) {
-                    alert("inserted successfully");
-                } else {
+                if (!response) {
                     confirm("insert failed");
+                } else {
+                    alert("Added successfully");
+                    window.location.href = "roles-list.php";
                 }
             }
         });

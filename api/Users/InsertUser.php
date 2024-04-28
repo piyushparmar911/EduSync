@@ -1,10 +1,12 @@
 <?php
 
 
-include ("../include.php");
+require '../../includes/init.php';
+
 
 $RoleId = $_POST['RoleId'];
 $Name = $_POST['Name'];
+$ClassId = $_POST['ClassId'];
 $Subject = $_POST['Subject'];
 $Address = $_POST['Address'];
 $Password = $_POST['Password'];
@@ -16,17 +18,13 @@ $Salary = $_POST['Salary'];
 
 
 
-$query = "INSERT INTO `users` (`RoleId`,`Name`,`Subject`, `Address`,`Password`,`Experience`,`ExperienceGain`,`LastDegree`,`LastWork`,
-                                `Salary`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+$query = "INSERT INTO `users` (`RoleId`,`Name`,`ClassId`,`Subject`, `Address`,`Password`,`Experience`,`ExperienceGain`,`LastDegree`,`LastWork`,
+                                `Salary`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
-$param = [$RoleId,$Name,$Subject,$Address,$Password,$Experience,$ExperienceGain, $LastDegree,$LastWork,$Salary];
 
-$statement = $connection->prepare($query);
-$data = $statement->execute($param);
+$result = execute($query,[$RoleId,$Name,$ClassId,$Subject,$Address,$Password,$Experience,$ExperienceGain, $LastDegree,$LastWork,$Salary]);
 
-if($data)
+if($result)
 {
-    echo "inserted user sucessfully";
+    echo "Success";
 }
-
-mysqli_close($connection);

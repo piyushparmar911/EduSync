@@ -11,8 +11,7 @@ CREATE TABLE
     `Roles` (
         `Id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         `Name` VARCHAR(255),
-        `ModuleId` INT NOT NULL,
-        FOREIGN KEY (`ModuleId`) REFERENCES `Modules` (`Id`)
+        
     );
 
 CREATE TABLE
@@ -20,6 +19,7 @@ CREATE TABLE
         `Id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         `RoleId` INT NOT NULL,
         `Name` VARCHAR(255) NOT NULL,
+        `ClassId` INT NOT NULL, 
         `Subject` VARCHAR(255) NOT NULL,
         `Address` VARCHAR(255) NOT NULL,
         `Password` VARCHAR(255) NOT NULL,
@@ -28,6 +28,7 @@ CREATE TABLE
         `LastDegree` VARCHAR(255) NOT NULL,
         `LastWork` VARCHAR(255) NOT NULL,
         `Salary` INT NOT NULL,
+        FOREIGN KEY (`ClassId`) REFERENCES `Class` (`Id`);
         FOREIGN key (`RoleId`) REFERENCES `Roles` (`Id`)
     );
 

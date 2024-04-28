@@ -19,7 +19,6 @@ include pathof("./includes/sidebar.php");
 </ul>
 </div>
 <div class="col-auto text-right float-right ml-auto">
-<a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
 <a href="add-Leave.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
 </div>
 </div>
@@ -33,7 +32,7 @@ include pathof("./includes/sidebar.php");
 <table class="table table-hover table-center mb-0 datatable">
 <thead>
 <tr>
-<th>Leave ID</th>
+<th>Sr No</th>
 <th>User Name</th>
 <th>Started Date</th>
 <th>End date</th>

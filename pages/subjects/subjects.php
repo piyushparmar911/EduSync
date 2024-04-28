@@ -16,7 +16,6 @@ include pathof("./includes/sidebar.php");
                         </ul>
                      </div>
                      <div class="col-auto text-right float-right ml-auto">
-                        <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
                         <a href="add-subject.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                      </div>
                   </div>
@@ -29,10 +28,11 @@ include pathof("./includes/sidebar.php");
                               <table class="table table-hover table-center mb-0 datatable">
                                  <thead>
                                     <tr>
-                                       <th>ID</th>
+                                       <th>Sr No</th>
                                        <th>Name</th>
                                        <th>Class Id</th>
-                                       <th class="text-right">Action</th>
+                                       <th>Modify</th>
+                                       <th>Delete</th>
                                     </tr>
                                  </thead>
                                  <tbody>
@@ -44,16 +44,17 @@ include pathof("./includes/sidebar.php");
                                           </h2>
                                        </td>
                                        <td>5</td>
-                                       <td class="text-right">
-                                          <div class="actions">
-                                             <a href="edit-subject.php" class="btn btn-sm bg-success-light mr-2">
-                                             <i class="fas fa-pen"></i>
-                                             </a>
-                                             <a href="#" class="btn btn-sm bg-danger-light">
-                                             <i class="fas fa-trash"></i>
-                                             </a>
-                                          </div>
-                                       </td>
+                                       <td class="text-left">
+                                            <a href="edit-user.php" class="btn btn-sm bg-success-light ml-2">
+                                                <i class="fas fa-pen"></i>
+
+                                            </a>
+                                        </td>
+                                        <td class="text-left">
+                                            <a href="#" class="btn btn-sm bg-danger-light ml-2">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                        <td>PRE2213</td>

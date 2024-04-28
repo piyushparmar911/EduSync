@@ -2,6 +2,12 @@
 require ("../../includes/init.php");
 include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
+
+
+$query = "SELECT * FROM `class`";
+
+
+$data = select($query);
 ?>
 
          <div class="page-wrapper">
@@ -16,7 +22,6 @@ include pathof("./includes/sidebar.php");
                         </ul>
                      </div>
                      <div class="col-auto text-right float-right ml-auto">
-                        <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
                         <a href="add-class.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                      </div>
                   </div>
@@ -29,127 +34,41 @@ include pathof("./includes/sidebar.php");
                               <table class="table table-hover table-center mb-0 datatable">
                                  <thead>
                                     <tr>
-                                       <th>ID</th>
+                                       <th>Sr No</th>
                                        <th>Name</th>
-                                       <th>Class Id</th>
-                                       <th class="text-right">Action</th>
+                                       <th>Boys</th>
+                                       <th>Girls</th>
+                                       <th>TotalStudents</th>
+                                       <th>Modify</th>
+                                       <th>Delete</th>
                                     </tr>
                                  </thead>
                                  <tbody>
-                                    <tr>
-                                       <td>PRE2209</td>
-                                       <td>
-                                          <h2>
-                                             <a>Mathematics</a>
-                                          </h2>
-                                       </td>
-                                       <td>5</td>
-                                       <td class="text-right">
-                                          <div class="actions">
-                                             <a href="edit-class.php" class="btn btn-sm bg-success-light mr-2">
-                                             <i class="fas fa-pen"></i>
+                                    <?php foreach($data as $row){ ?>
+                                       <tr>
+                                          <td><?=$row['Id']?></td>
+                                          <td>
+                                             <h2>
+                                                <a><?=$row['Name']?></a>
+                                             </h2>
+                                          </td>
+                                       <td><?=$row['Boys']?></td>
+                                       <td><?=$row['Girls']?></td>
+                                       <td><?=$row['TotalStudents']?></td>
+                                       <td class="text-left">
+                                            <a href="edit-class.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light ml-2">
+                                               <i class="fas fa-pen"></i>
+
+                                            </a>
+                                        </td>
+                                        <td class="text-left">
+                                            <a href="../../api/class/deleteClass.php?id=<?=$row['Id']?>" class="btn btn-sm bg-danger-light ml-2">
+                                                <i class="fas fa-trash"></i>
                                              </a>
-                                             <a href="#" class="btn btn-sm bg-danger-light">
-                                             <i class="fas fa-trash"></i>
-                                             </a>
-                                          </div>
-                                       </td>
+                                          </td>
                                     </tr>
-                                    <tr>
-                                       <td>PRE2213</td>
-                                       <td>
-                                          <h2>
-                                             <a>History</a>
-                                          </h2>
-                                       </td>
-                                       <td>6</td>
-                                       <td class="text-right">
-                                          <div class="actions">
-                                             <a href="edit-class.php" class="btn btn-sm bg-success-light mr-2">
-                                             <i class="fas fa-pen"></i>
-                                             </a>
-                                             <a href="#" class="btn btn-sm bg-danger-light">
-                                             <i class="fas fa-trash"></i>
-                                             </a>
-                                          </div>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td>PRE2143</td>
-                                       <td>
-                                          <h2>
-                                             <a>Science</a>
-                                          </h2>
-                                       </td>
-                                       <td>3</td>
-                                       <td class="text-right">
-                                          <div class="actions">
-                                             <a href="edit-class.php" class="btn btn-sm bg-success-light mr-2">
-                                             <i class="fas fa-pen"></i>
-                                             </a>
-                                             <a href="#" class="btn btn-sm bg-danger-light">
-                                             <i class="fas fa-trash"></i>
-                                             </a>
-                                          </div>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td>PRE2431</td>
-                                       <td>
-                                          <h2>
-                                             <a>Geography</a>
-                                          </h2>
-                                       </td>
-                                       <td>8</td>
-                                       <td class="text-right">
-                                          <div class="actions">
-                                             <a href="edit-class.php" class="btn btn-sm bg-success-light mr-2">
-                                             <i class="fas fa-pen"></i>
-                                             </a>
-                                             <a href="#" class="btn btn-sm bg-danger-light">
-                                             <i class="fas fa-trash"></i>
-                                             </a>
-                                          </div>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td>PRE1534</td>
-                                       <td>
-                                          <h2>
-                                             <a>Botony</a>
-                                          </h2>
-                                       </td>
-                                       <td>9</td>
-                                       <td class="text-right">
-                                          <div class="actions">
-                                             <a href="edit-class.php" class="btn btn-sm bg-success-light mr-2">
-                                             <i class="fas fa-pen"></i>
-                                             </a>
-                                             <a href="#" class="btn btn-sm bg-danger-light">
-                                             <i class="fas fa-trash"></i>
-                                             </a>
-                                          </div>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td>PRE2153</td>
-                                       <td>
-                                          <h2>
-                                             <a>English</a>
-                                          </h2>
-                                       </td>
-                                       <td>4</td>
-                                       <td class="text-right">
-                                          <div class="actions">
-                                             <a href="edit-class.php" class="btn btn-sm bg-success-light mr-2">
-                                             <i class="fas fa-pen"></i>
-                                             </a>
-                                             <a href="#" class="btn btn-sm bg-danger-light">
-                                             <i class="fas fa-trash"></i>
-                                             </a>
-                                          </div>
-                                       </td>
-                                    </tr>
+                                 <?php } ?>
+                                    
                                  </tbody>
                               </table>
                            </div>

@@ -106,7 +106,7 @@ a {
     color: #009ce7;
 }
 
-input,
+. . input,
 button,
 a {
     transition: all 0.4s ease;
@@ -296,7 +296,7 @@ table.table td h2 span {
 
 .card-table .card-body .table tr td:last-child,
 .card-table .card-body .table tr th:last-child {
-    padding-right: 1.5rem;
+    padding-right: 5rem;
 }
 
 .card-table .table td,
@@ -1691,7 +1691,7 @@ div.dataTables_wrapper div.dataTables_info {
 }
 
 .header .header-left .logo img {
-    max-height: 40px;
+    max-height: 60px;
     width: auto;
 }
 

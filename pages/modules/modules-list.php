@@ -21,7 +21,6 @@ $data = select($query);
                </ul>
             </div>
             <div class="col-auto text-right float-right ml-auto">
-               <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
                <a href="add-Module.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
             </div>
          </div>
@@ -34,9 +33,10 @@ $data = select($query);
                      <table class="table table-hover table-center mb-0 datatable">
                         <thead>
                            <tr>
-                              <th>Module Id</th>
+                              <th>Sr No</th>
                               <th>Module Name</th>
-                              <th class="text-right">Action</th>
+                              <th>Modify</th>
+                              <th>Delete</th>
                            </tr>
                         </thead>
                         <tbody>
@@ -48,16 +48,17 @@ $data = select($query);
                                        <a><?=$row['Name']?></a>
                                     </h2>
                                  </td>
-                                 <td class="text-right">
-                                    <div class="actions">
-                                       <a href="edit-Module.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light mr-2">
-                                          <i class="fas fa-pen"></i>
-                                       </a>
-                                       <a href="../../api/modules/deleteModules.php?id=<?=$row['Id']?>" onclick="return confirm('Are you sure you want to delete this module?');" class="btn btn-sm bg-danger-light">
-                                          <i class="fas fa-trash"></i>
-                                       </a>
-                                    </div>
-                                 </td>
+                                 <td class="text-left">
+                                            <a href="edit-module.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light ml-2">
+                                                <i class="fas fa-pen"></i>
+
+                                            </a>
+                                        </td>
+                                        <td class="text-left">
+                                            <a href="../../api/modules/deleteModules.php?id=<?=$row['Id']?>" class="btn btn-sm bg-danger-light ml-1">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
                               </tr>
                               <?php }?>
                            

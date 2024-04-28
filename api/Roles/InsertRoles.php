@@ -1,23 +1,15 @@
 <?php
 
-include ("../include.php"); 
-
+require '../../includes/init.php';
 
 $Name = $_POST['Name'];
-// $ModuleId = $_POST['ModuleId'];
 
 
-    $query = "INSERT INTO `roles` (`Name`,`ModuleId`) VALUES (?,?)";
-    $param = [$Name,$ModuleId];
-
-    $statement = $connection->prepare($query);
-    $data = $statement->execute($param);
+    $query = "INSERT INTO `roles` (`Name`) VALUES (?)";
 
 
-    if($data)
-    {
-        echo "inserted Role";
-    }
+    $result = execute($query,[$Name]);
 
-    mysqli_close($connection);
+
+    
     
