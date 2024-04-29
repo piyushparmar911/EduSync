@@ -3,8 +3,6 @@ require("../../includes/init.php");
 include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
 
-$query = "SELECT * FROM  `modules`";
-$data = select($query)
 ?>
 
 
@@ -54,7 +52,6 @@ $data = select($query)
 <script>
     function insertdata() {
         let Name = $('#Name').val();
-        let ModuleId = $('#ModuleId').val();
 
         if (!Name.trim()) {
             alert("Please enter module name first.");
@@ -65,8 +62,7 @@ $data = select($query)
             url: '../../api/roles/insertRoles.php',
             type: 'POST',
             data: {
-                Name: Name,
-                ModuleId: ModuleId
+                Name: Name
                 
             },
             success: function(response) {
