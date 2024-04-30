@@ -67,7 +67,7 @@ $data = select($query);
                                                             <a href="edit-Leave.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light mr-2">
                                                                 <i class="fas fa-pen"></i>
                                                             </a>
-                                                            <a href="../../api/leaves/deleteLeave.php?id=<?=$row['Id']?>" class="btn btn-sm bg-danger-light">
+                                                            <a href="../../api/leaves/deleteLeave.php?id=<?=$row['Id']?>" onclick="return confirm('Are you sure to delete this role')" class="btn btn-sm bg-danger-light">
                                                                 <i class="fas fa-trash"></i>
                                                             </a>
                                                         </div>

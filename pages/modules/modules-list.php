@@ -55,7 +55,7 @@ $data = select($query);
                                             </a>
                                         </td>
                                         <td class="text-left">
-                                            <a href="../../api/modules/deleteModules.php?id=<?=$row['Id']?>" class="btn btn-sm bg-danger-light ml-1">
+                                            <a href="../../api/modules/deleteModules.php?id=<?=$row['Id']?>" onclick="return confirm('Are you sure to delete this module')" class="btn btn-sm bg-danger-light ml-1">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>

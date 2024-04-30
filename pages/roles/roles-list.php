@@ -48,7 +48,7 @@ $data = select($query);
                                                 <a href="edit-role.php?id=<?= $row['Id'] ?>" class="btn btn-sm bg-success-light ml-2"><i class="fas fa-pen"></i></a>
                                             </td>
                                             <td class="text-left">
-                                                <a href="../../api/roles/deleteRoles.php?id=<?= $row['Id'] ?>" class="btn btn-sm bg-danger-light ml-2">
+                                                <a href="../../api/roles/deleteRoles.php?id=<?= $row['Id'] ?>" onclick="return confirm('Are you sure to delete this role')" class="btn btn-sm bg-danger-light ml-2">
                                                 <i class="fas fa-trash"></i></a>
                                             </td>
                                         </tr>

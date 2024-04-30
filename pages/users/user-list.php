@@ -71,7 +71,7 @@ $data = select($query);
                                                 
                                         <td class="text-center">
                                             <div class="ml-2">
-                                                <a href="../../api/users/deleteUser.php?id=<?=$row['Id']?>" class="btn btn-sm bg-danger-light mr-3">
+                                                <a href="../../api/users/deleteUser.php?id=<?=$row['Id']?>" onclick="return confirm('Are you sure to delete this user')" class="btn btn-sm bg-danger-light mr-3">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </div>

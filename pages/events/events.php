@@ -67,7 +67,7 @@ $data = select($query);
                                                         </a>
                                                     </td>
                                                     <td class="text-left">
-                                                        <a href="../../api/events/deleteEvent.php?id=<?=$row['Id']?>" class="btn btn-sm bg-danger-light ml-2">
+                                                        <a href="../../api/events/deleteEvent.php?id=<?=$row['Id']?>" onclick="return confirm('Are you sure to delete this event')" class="btn btn-sm bg-danger-light ml-2">
                                                             <i class="fas fa-trash"></i>
                                                         </a>
                                                     </td>
