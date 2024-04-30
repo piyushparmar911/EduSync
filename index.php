@@ -2,6 +2,15 @@
 require ("./includes/init.php");
 include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
+
+$queryU = "SELECT * FROM `users`" ;
+$query = "SELECT * FROM `event`";
+$queryUser = "SELECT `Id`,`Name` FROM `users`";
+
+$dataUser = select($queryUser); 
+$dataU = select($queryU); 
+$data = select($query);
+
 ?>        
 
 
@@ -144,74 +153,36 @@ include pathof("./includes/sidebar.php");
                         </div>
                         <div class="card-body">
                            <div class="table-responsive">
-                              <table class="table table-hover table-center">
-                                 <thead class="thead-light">
+                           <table class="table table-hover table-center mb-0 datatable">
+                                <thead>
                                     <tr>
-                                       <th>ID</th>
-                                       <th>Name</th>
-                                       <th class="text-center">Marks</th>
-                                       <th class="text-center">Percentage</th>
-                                       <th class="text-right">Year</th>
+                                        <th>Sr No</th>
+                                        <th>Name</th>
+                                        <th>RoleId</th>
+                                        <th>ClassId</th>
+                                        <th>Subject</th>
+                                        <th>LastWork</th>
+                                        <th>Experience</th>
+                                        <th>Address</th>
                                     </tr>
-                                 </thead>
-                                 <tbody>
-                                    <tr>
-                                       <td class="text-nowrap">
-                                          <div>PRE2209</div>
-                                       </td>
-                                       <td class="text-nowrap">John Smith</td>
-                                       <td class="text-center">1185</td>
-                                       <td class="text-center">98%</td>
-                                       <td class="text-right">
-                                          <div>2019</div>
-                                       </td>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($dataU as $row) {?>
+
+                                        <tr>
+                                            <td><?=$row['Id']?></td>
+                                            <td><?=$row['Name']?></td>
+                                            <td><?=$row['RoleId']?></td>
+                                            <td><?=$row['ClassId']?></td>
+                                        <td><?=$row['Subject']?></td>
+                                        <td><?=$row['LastWork']?></td>
+                                        <td><?=$row['Experience']?></td>
+                                        <td><?=$row['Address']?></td>
                                     </tr>
-                                    <tr>
-                                       <td class="text-nowrap">
-                                          <div>PRE1245</div>
-                                       </td>
-                                       <td class="text-nowrap">Jolie Hoskins</td>
-                                       <td class="text-center">1195</td>
-                                       <td class="text-center">99.5%</td>
-                                       <td class="text-right">
-                                          <div>2018</div>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td class="text-nowrap">
-                                          <div>PRE1625</div>
-                                       </td>
-                                       <td class="text-nowrap">Pennington Joy</td>
-                                       <td class="text-center">1196</td>
-                                       <td class="text-center">99.6%</td>
-                                       <td class="text-right">
-                                          <div>2017</div>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td class="text-nowrap">
-                                          <div>PRE2516</div>
-                                       </td>
-                                       <td class="text-nowrap">Millie Marsden</td>
-                                       <td class="text-center">1187</td>
-                                       <td class="text-center">98.2%</td>
-                                       <td class="text-right">
-                                          <div>2016</div>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td class="text-nowrap">
-                                          <div>PRE2209</div>
-                                       </td>
-                                       <td class="text-nowrap">John Smith</td>
-                                       <td class="text-center">1185</td>
-                                       <td class="text-center">98%</td>
-                                       <td class="text-right">
-                                          <div>2015</div>
-                                       </td>
-                                    </tr>
-                                 </tbody>
-                              </table>
+                                    <?php }?>
+                                    
+                                </tbody>
+                            </table>
                            </div>
                         </div>
                      </div>
@@ -221,30 +192,34 @@ include pathof("./includes/sidebar.php");
                         <div class="card-header">
                            <h5 class="card-title">Users Activity</h5>
                         </div>
-                        <div class="card-body">
-                           <ul class="activity-feed">
-                              <li class="feed-item">
-                                 <div class="feed-date">Apr 13</div>
-                                 <span class="feed-text"><a>John Doe</a> won 1st place in <a>"Chess"</a></span>
-                              </li>
-                              <li class="feed-item">
-                                 <div class="feed-date">Mar 21</div>
-                                 <span class="feed-text"><a>Justin Lee</a> participated in <a href="invoice.html">"Carrom"</a></span>
-                              </li>
-                              <li class="feed-item">
-                                 <div class="feed-date">Feb 2</div>
-                                 <span class="feed-text"><a>Justin Lee</a>attended internation conference in <a href="profile.html">"St.John School"</a></span>
-                              </li>
-                              <li class="feed-item">
-                                 <div class="feed-date">Apr 13</div>
-                                 <span class="feed-text"><a>John Doe</a> won 1st place in <a>"Chess"</a></span>
-                              </li>
-                              <li class="feed-item">
-                                 <div class="feed-date">Mar 21</div>
-                                 <span class="feed-text"><a>Justin Lee</a> participated in <a href="invoice.html">"Carrom"</a></span>
-                              </li>
-                           </ul>
-                        </div>
+                        <table class="table table-hover table-center mb-0 datatable">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No</th>
+                                        <th>Name</th>
+                                        <th>User Id(Head of event)</th>
+                                        <th>Date</th>
+                                        <th>Place</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <?php foreach ($data as $row) {?>
+                                            <td><?=$row['Id']?></td>
+                                            <td>
+                                                <h2>
+                                                    <a><?=$row['Name']?></a>
+                                                </h2>
+                                            </td>
+                                                <td><?=$row['UserId']?></td>
+                                                    <td><?=$row['DateTime']?></td>
+                                                    <td><?=$row['Place']?></td>
+                                                    
+                                                </tr>
+                                                <?php } ?>
+                                                
+                                            </tbody>
+                            </table>
                      </div>
                   </div>
                </div>
