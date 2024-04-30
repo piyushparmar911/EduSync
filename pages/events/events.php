@@ -2,6 +2,13 @@
 require("../../includes/init.php");
 include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
+
+$query = "SELECT * FROM `event`";
+$queryUser = "SELECT `Id`,`Name` FROM `users`";
+
+$dataUser = select($queryUser); 
+
+$data = select($query); 
 ?>
 
 <link rel="stylesheet" href="<?= urlOf("assets/plugins/datatables/datatables.min.css") ?>">
@@ -34,142 +41,40 @@ include pathof("./includes/sidebar.php");
                                     <tr>
                                         <th>Sr No</th>
                                         <th>Name</th>
-                                        <th>Place</th>
+                                        <th>User Id(Head of event)</th>
                                         <th>Date</th>
-                                        <th>No Of Participate</th>
+                                        <th>Place</th>
                                         <th>Modify</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>PRE2209</td>
-                                        <td>
-                                            <h2>
-                                                <a>Computer Science Engg</a>
-                                            </h2>
-                                        </td>
-                                        <td>Aaliyah</td>
-                                        <td>19-5-2024</td>
-                                        <td>180</td>
-                                        <td class="text-left">
-                                            <a href="edit-event.php" class="btn btn-sm bg-success-light ml-2">
-                                                <i class="fas fa-pen"></i>
-
-                                            </a>
-                                        </td>
-                                        <td class="text-left">
-                                            <a href="#" class="btn btn-sm bg-danger-light ml-2">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>PRE2213</td>
-                                        <td>
-                                            <h2>
-                                                <a>Mechanical Engg</a>
-                                            </h2>
-                                        </td>
-                                        <td>Malynne</td>
-                                        <td>1999</td>
-                                        <td>240</td>
-                                        <td class="text-right">
-                                            <div class="actions">
-                                                <a href="edit-Event.php" class="btn btn-sm bg-success-light mr-2">
-                                                    <i class="fas fa-pen"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-sm bg-danger-light">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>PRE2143</td>
-                                        <td>
-                                            <h2>
-                                                <a>Electrical Engg</a>
-                                            </h2>
-                                        </td>
-                                        <td>Levell Scott</td>
-                                        <td>1994</td>
-                                        <td>163</td>
-                                        <td class="text-right">
-                                            <div class="actions">
-                                                <a href="edit-Event.php" class="btn btn-sm bg-success-light mr-2">
-                                                    <i class="fas fa-pen"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-sm bg-danger-light">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>PRE2431</td>
-                                        <td>
-                                            <h2>
-                                                <a>Civil Engg</a>
-                                            </h2>
-                                        </td>
-                                        <td>Minnie</td>
-                                        <td>2000</td>
-                                        <td>195</td>
-                                        <td class="text-right">
-                                            <div class="actions">
-                                                <a href="edit-Event.php" class="btn btn-sm bg-success-light mr-2">
-                                                    <i class="fas fa-pen"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-sm bg-danger-light">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>PRE1534</td>
-                                        <td>
-                                            <h2>
-                                                <a>MCA</a>
-                                            </h2>
-                                        </td>
-                                        <td>Lois A</td>
-                                        <td>1992</td>
-                                        <td>200</td>
-                                        <td class="text-right">
-                                            <div class="actions">
-                                                <a href="edit-Event.php" class="btn btn-sm bg-success-light mr-2">
-                                                    <i class="fas fa-pen"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-sm bg-danger-light">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>PRE2153</td>
-                                        <td>
-                                            <h2>
-                                                <a>BCA</a>
-                                            </h2>
-                                        </td>
-                                        <td>Calvin</td>
-                                        <td>1992</td>
-                                        <td>152</td>
-                                        <td class="text-right">
-                                            <div class="actions">
-                                                <a href="edit-Event.php" class="btn btn-sm bg-success-light mr-2">
-                                                    <i class="fas fa-pen"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-sm bg-danger-light">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                        <?php foreach ($data as $row) {?>
+                                            <td><?=$row['Id']?></td>
+                                            <td>
+                                                <h2>
+                                                    <a><?=$row['Name']?></a>
+                                                </h2>
+                                            </td>
+                                                <td><?=$row['UserId']?></td>
+                                                    <td><?=$row['DateTime']?></td>
+                                                    <td><?=$row['Place']?></td>
+                                                    <td class="text-left">
+                                                        <a href="edit-event.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light ml-2">
+                                                            <i class="fas fa-pen"></i>
+                                                            
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <a href="../../api/events/deleteEvent.php?id=<?=$row['Id']?>" class="btn btn-sm bg-danger-light ml-2">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <?php } ?>
+                                                
+                                            </tbody>
                             </table>
                         </div>
                     </div>
@@ -177,6 +82,8 @@ include pathof("./includes/sidebar.php");
             </div>
         </div>
     </div>
+
+
 
     <?php
     include pathOf("./includes/footer.php");

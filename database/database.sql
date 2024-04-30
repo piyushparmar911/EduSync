@@ -91,6 +91,7 @@ CREATE TABLE
         `UserId` INT NOT NULL,
         `Name` VARCHAR(255) NOT NULL,
         `DateTime` DATE,
+        `Place` VARCHAR(255) NOT NULL,
         FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`)
     );
 

@@ -18,10 +18,10 @@
                         <a href="<?=urlOf("pages/users/user-list.php")?>" accesskey="u"><i class="fas fa-users"></i> <span> Users</span></a>
                      </li>
                      <li class="Departments">
-                        <a href="<?=urlOf("pages/department/departments.php")?>" accesskey="p"><i class="fas fa-building"></i><span>Departments </span></a>
+                        <a href="<?=urlOf("pages/department/departments-list.php")?>" accesskey="p"><i class="fas fa-building"></i><span>Departments </span></a>
                      </li>
                      <li class="Subjects">
-                        <a href="<?=urlOf("pages/subjects/subjects.php")?>" accesskey="s"><i class="fas fa-book"></i> <span>Subjects</span> </a>
+                        <a href="<?=urlOf("pages/subjects/subjects-list.php")?>" accesskey="s"><i class="fas fa-book"></i> <span>Subjects</span> </a>
                      </li>
                      <li class="class">
                         <a href="<?=urlOf("pages/class/class-list.php")?>" accesskey="c"><i class="fas fa-users-line "></i><span>Class</span></a>

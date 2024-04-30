@@ -45,8 +45,8 @@ $data = select($query);
                                         <th>LastWork</th>
                                         <th>Experience</th>
                                         <th>Address</th>
-                                        <th>Modify</th>
-                                        <th>Delete</th>
+                                        <th class="text-center">Modify</th>
+                                        <th class="text-center">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,15 +62,19 @@ $data = select($query);
                                         <td><?=$row['Experience']?></td>
                                         <td><?=$row['Address']?></td>
                                         <td class="text-center">
-                                            <a href="edit-user.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light mr-5">
-                                                <i class="fas fa-pen"></i>
-                                                
-                                            </a>
+                                            <div class="ml-2">
+                                                <a href="edit-user.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light mr-3">
+                                                    <i class="fas fa-pen"></i>
+                                                </a>
+                                            </div>
                                         </td>
+                                                
                                         <td class="text-center">
-                                            <a href="../../api/users/deleteUser.php?id=<?=$row['Id']?>" class="btn btn-sm bg-danger-light mr-4">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
+                                            <div class="ml-2">
+                                                <a href="../../api/users/deleteUser.php?id=<?=$row['Id']?>" class="btn btn-sm bg-danger-light mr-3">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
                                     <?php }?>

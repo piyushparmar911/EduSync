@@ -62,7 +62,7 @@ $data = select($query);
                                             </a>
                                         </td>
                                         <td class="text-left">
-                                            <a href="../../api/class/deleteClass.php?id=<?=$row['Id']?>" class="btn btn-sm bg-danger-light ml-2">
+                                            <a href="../../api/departments/deleteDepartment.php?id=<?=$row['Id']?>" class="btn btn-sm bg-danger-light ml-2">
                                                 <i class="fas fa-trash"></i>
                                              </a>
                                           </td>

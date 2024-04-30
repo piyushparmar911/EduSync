@@ -180,7 +180,7 @@ $queryrole = "SELECT `Id`, `Name` FROM `roles`";
 
                     else
                         alert("user updated successfully");
-                    window.location.href = 'user.php';
+                    window.location.href = 'user-list.php';
                 }
             });
         }
