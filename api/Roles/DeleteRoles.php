@@ -7,13 +7,9 @@ $query = "DELETE FROM `roles` WHERE `Id` = ?";
 
 $result = execute($query, [$Id]);
 
-if($result == true )
+if($result)
 {
     header("Location: ../../pages/roles/roles-list.php");
-}
-else
-{
-    header('location: ../../pages/roles/roles-list.php');
 }
 
 
