@@ -10,8 +10,4 @@ $query = "UPDATE `roles` SET `Name` = ?  WHERE `id` = ?";
 
 $result = execute($query,[$Name,$Id]);
 
-if($result)
-{
-    echo "updated";
-}
 
