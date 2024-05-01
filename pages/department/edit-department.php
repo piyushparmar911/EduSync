@@ -4,7 +4,7 @@ include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
 
 
-$Id = $_GET['id'];
+$Id = $_POST['id'];
 $query = "SELECT * FROM `departments` WHERE `Id` = '$Id'";
 $queryUser = "SELECT `Id`, `Name` FROM `users`";
 

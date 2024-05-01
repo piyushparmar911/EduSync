@@ -5,7 +5,7 @@ include pathof("./includes/sidebar.php");
 
 
 $query = "SELECT * FROM `subjects`" ;
-
+$index = 0;
 $data = select($query);
 ?>
 
@@ -44,7 +44,7 @@ $data = select($query);
                                  <tbody>
                                        <?php foreach ($data as $row) {  ?>
                                        <tr>
-                                          <td><?=$row['Id']?></td>
+                                          <td><?=$index += 1?></td>
                                           <td>
                                              <h2>
                                                 <a><?=$row['Name']?></a>
@@ -52,13 +52,13 @@ $data = select($query);
                                           </td>
                                           <td><?=$row['ClassId']?></td>
                                           <td class="text-left">
-                                             <a href="edit-subject.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light ml-2">
+                                             <a onclick="editSubject(<?=$row['Id']?>)" class="btn btn-sm bg-success-light ml-2">
                                                 <i class="fas fa-pen"></i>
                                                 
                                              </a>
                                           </td>
                                           <td class="text-left">
-                                             <a href="../../api/subjects/deleteSubject.php?id=<?=$row['Id']?>" onclick="return alert('Are you sure to delete this subject');" class="btn btn-sm bg-danger-light ml-2">
+                                             <a onclick="deleteSubject(<?=$row['Id']?>)" class="btn btn-sm bg-danger-light ml-2">
                                                 <i class="fas fa-trash"></i>
                                              </a>
                                              </td>
@@ -75,6 +75,37 @@ $data = select($query);
             </div>
 
 
+            <script>
+    function deleteSubject(Id)
+    {
+        if(confirm("are you sure you want to delete this role"));
+        $.ajax({
+            url: "../../api/Subjects/deleteSubject.php",
+            method : "POST",
+            data  : {
+                id : Id
+            },
+            success: function(response){
+                    if(response)
+                    location.reload();
+            }
+        })
+    }
+
+    
+    function editSubject(Id) {
+        $.ajax({
+            type: "POST",
+            url: "edit-subject.php",
+            data: {
+                id: Id
+            },
+            success: function(response) {
+                $("body").html(response);
+            }
+        })
+    }
+</script>
 <?php
 include pathOf("./includes/footer.php");
 include pathOf("./includes/pageend.php"); 

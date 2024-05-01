@@ -24,16 +24,9 @@ include pathof("./includes/sidebar.php");
 <div class="col-sm-12">
 <div class="card">
 <div class="card-body">
-<form>
 <div class="row">
 <div class="col-12">
 <h5 class="form-title"><span>Class Information</span></h5>
-</div>
-<div class="col-12 col-sm-6">
-<div class="form-group">
-<label>Class ID</label>
-<input type="text" hidden class="form-control">
-</div>
 </div>
 <div class="col-12 col-sm-6">
 <div class="form-group">
@@ -60,11 +53,10 @@ include pathof("./includes/sidebar.php");
 <label>Total student</label>
 <input type="number" id="TotalStudent" class="form-control">
 </div>
-<div class="col-12">
+</div>
+<div class="col-12 col-sm-6">
 <button type="submit" onclick="insert()" class="btn btn-primary">Submit</button>
 </div>
-</div>
-</form>
 </div>
 </div>
 </div>

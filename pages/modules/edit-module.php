@@ -3,7 +3,7 @@ require("../../includes/init.php");
 include pathOf("./includes/header.php");
 include pathOf("./includes/sidebar.php");
 
-    $Id = $_GET['id'];
+    $Id = $_POST['id'];
     $query = "SELECT * FROM `modules` WHERE `Id`= '$Id'";
     
 $data = selectOne($query);    

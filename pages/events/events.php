@@ -7,7 +7,7 @@ $query = "SELECT * FROM `event`";
 $queryUser = "SELECT `Id`,`Name` FROM `users`";
 
 $dataUser = select($queryUser); 
-
+$index = 0;
 $data = select($query); 
 ?>
 
@@ -51,7 +51,7 @@ $data = select($query);
                                 <tbody>
                                     <tr>
                                         <?php foreach ($data as $row) {?>
-                                            <td><?=$row['Id']?></td>
+                                            <td><?=$index += 1?></td>
                                             <td>
                                                 <h2>
                                                     <a><?=$row['Name']?></a>
@@ -61,13 +61,13 @@ $data = select($query);
                                                     <td><?=$row['DateTime']?></td>
                                                     <td><?=$row['Place']?></td>
                                                     <td class="text-left">
-                                                        <a href="edit-event.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light ml-2">
+                                                        <a onclick="editEvent(<?=$row['Id']?>)" class="btn btn-sm bg-success-light ml-2">
                                                             <i class="fas fa-pen"></i>
                                                             
                                                         </a>
                                                     </td>
                                                     <td class="text-left">
-                                                        <a href="../../api/events/deleteEvent.php?id=<?=$row['Id']?>" onclick="return confirm('Are you sure to delete this event')" class="btn btn-sm bg-danger-light ml-2">
+                                                        <a onclick="deleteEvent(<?=$row['Id']?>)" class="btn btn-sm bg-danger-light ml-2">
                                                             <i class="fas fa-trash"></i>
                                                         </a>
                                                     </td>
@@ -84,6 +84,36 @@ $data = select($query);
     </div>
 
 
+    <script>
+    function deleteEvent(Id)
+    {
+        if(confirm("are you sure you want to delete this role"));
+        $.ajax({
+            url: "../../api/events/deleteEvent.php",
+            method : "POST",
+            data  : {
+                id : Id
+            },
+            success: function(response){
+                    if(response)
+                    location.reload();
+            }
+        })
+    }
+
+    function editEvent(Id) {
+        $.ajax({
+            type: "POST",
+            url: "edit-event.php",
+            data: {
+                id: Id
+            },
+            success: function(response) {
+                $("body").html(response);
+            }
+        });
+    }
+</script>
 
     <?php
     include pathOf("./includes/footer.php");

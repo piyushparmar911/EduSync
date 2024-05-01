@@ -4,7 +4,7 @@ include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
 
 $query = "SELECT * FROM `departments`";
-
+$index = 0;
 $data = select($query); 
 ?>
 
@@ -49,7 +49,7 @@ $data = select($query);
                                     <?php foreach ($data as $row) {?>
 
                                         <tr>
-                                            <td><?=$row['Id']?></td>
+                                            <td><?=$index += 1?></td>
                                             <td>
                                                 <h2>
                                                     <a><?=$row['Name']?></a>
@@ -59,13 +59,13 @@ $data = select($query);
                                             <td><?=$row['StartedYear']?></td>
                                             <td><?=$row['NoOfStudent']?></td>
                                             <td class="text-left">
-                                                <a href="edit-department.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light ml-2">
+                                                <a onclick="editDepartment(<?=$row['Id']?>)" class="btn btn-sm bg-success-light ml-2">
                                                     <i class="fas fa-pen"></i>
                                                     
                                                 </a>
                                             </td>
                                             <td class="text-left">
-                                                <a href="../../api/departments/deleteDepartment.php?id=<?=$row['Id']?>" onclick="return confirm('Are you sure to delete this department')" class="btn btn-sm bg-danger-light ml-2">
+                                                <a onclick="deleteDepartment(<?=$row['Id']?>)" class="btn btn-sm bg-danger-light ml-2">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
@@ -81,6 +81,36 @@ $data = select($query);
         </div>
     </div>
 
+    <script>
+    function deleteDepartment(Id)
+    {
+        if(confirm("are you sure you want to delete this role"));
+        $.ajax({
+            url: "../../api/departments/deleteDepartment.php",
+            method : "POST",
+            data  : {
+                id : Id
+            },
+            success: function(response){
+                    if(response)
+                    location.reload();
+            }
+        })
+    }
+
+    function editDepartment(Id) {
+        $.ajax({
+            type: "POST",
+            url: "edit-department.php",
+            data: {
+                id: Id
+            },
+            success: function(response) {
+                $("body").html(response);
+            }
+        });
+    }
+</script>
     <?php
     include pathOf("./includes/footer.php");
     include pathOf("./includes/pageend.php");

@@ -4,6 +4,8 @@ include pathOf("./includes/header.php");
 include pathOf("./includes/sidebar.php");
 
 $query = "SELECT * FROM `roles`";
+$index = 0;
+
 $data = select($query);
 ?>
 
@@ -40,15 +42,15 @@ $data = select($query);
                                 <tbody>
                                     <?php foreach ($data as $row) { ?>
                                         <tr>
-                                            <td><?= $row['Id'] ?></td>
+                                            <td><?= $index += 1 ?></td>
                                             <td>
                                                 <h2><a><?= $row['Name'] ?></a></h2>
                                             </td>
                                             <td class="text-left">
-                                                <a href="edit-role.php?id=<?= $row['Id'] ?>" class="btn btn-sm bg-success-light ml-2"><i class="fas fa-pen"></i></a>
+                                                <a onclick="editRole(<?=$row['Id']?>)" class="btn btn-sm bg-success-light ml-2"><i class="fas fa-pen"></i></a>
                                             </td>
                                             <td class="text-left">
-                                                <a href="../../api/roles/deleteRoles.php?id=<?= $row['Id'] ?>" onclick="return confirm('Are you sure to delete this role')" class="btn btn-sm bg-danger-light ml-2">
+                                                <a  onclick="deleteRole(<?=$row['Id']?>)" class="btn btn-sm bg-danger-light ml-2">
                                                 <i class="fas fa-trash"></i></a>
                                             </td>
                                         </tr>
@@ -61,7 +63,35 @@ $data = select($query);
             </div>
         </div>
     </div>
-
+<script>
+    function deleteRole(roleId)
+    {
+        if(confirm("are you sure you want to delete this role"));
+        $.ajax({
+            url: "../../api/roles/deleteRoles.php",
+            method : "POST",
+            data  : {
+                id : roleId
+            },
+            success: function(response){
+                    if(response)
+                    location.reload();
+            }
+        })
+    }
+    function editRole(roleId) {
+        $.ajax({
+            type: "POST",
+            url: "edit-role.php",
+            data: {
+                id: roleId
+            },
+            success: function(response) {
+                $("body").html(response);
+            }
+        });
+    }
+</script>
     <?php
 include pathOf("./includes/footer.php");
 include pathOf("./includes/pageend.php");

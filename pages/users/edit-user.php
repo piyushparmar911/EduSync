@@ -4,7 +4,7 @@
     include pathof("./includes/sidebar.php");
 
 
-    $Id = $_GET['id'];
+    $Id = $_POST['id'];
 
     $query = "SELECT * FROM `users` WHERE `Id` = '$Id'";
     $queryrole = "SELECT `Id`, `Name` FROM `roles`";

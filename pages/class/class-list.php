@@ -6,7 +6,7 @@ include pathof("./includes/sidebar.php");
 
 $query = "SELECT * FROM `class`";
 
-
+$index = 0;
 $data = select($query);
 ?>
 
@@ -46,7 +46,7 @@ $data = select($query);
                                  <tbody>
                                     <?php foreach($data as $row){ ?>
                                        <tr>
-                                          <td><?=$row['Id']?></td>
+                                          <td><?=$index += 1?></td>
                                           <td>
                                              <h2>
                                                 <a><?=$row['Name']?></a>
@@ -56,13 +56,13 @@ $data = select($query);
                                        <td><?=$row['Girls']?></td>
                                        <td><?=$row['TotalStudents']?></td>
                                        <td class="text-left">
-                                            <a href="edit-class.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light ml-2">
+                                            <a onclick="editClass(<?=$row['Id']?>)" class="btn btn-sm bg-success-light ml-2">
                                                <i class="fas fa-pen"></i>
 
                                             </a>
                                         </td>
                                         <td class="text-left">
-                                            <a href="../../api/departments/deleteDepartment.php?id=<?=$row['Id']?>" onclick="return confirm('Are you sure to delete this class')" class="btn btn-sm bg-danger-light ml-2">
+                                            <a onclick="deleteClass(<?=$row['Id']?>)" class="btn btn-sm bg-danger-light ml-2">
                                                 <i class="fas fa-trash"></i>
                                              </a>
                                           </td>
@@ -78,6 +78,37 @@ $data = select($query);
                </div>
             </div>
 
+
+            <script>
+    function deleteClass(Id)
+    {
+        if(confirm("are you sure you want to delete this role"));
+        $.ajax({
+            url: "../../api/class/deleteClass.php",
+            method : "POST",
+            data  : {
+                id : Id
+            },
+            success: function(response){
+                    if(response)
+                    location.reload();
+            }
+        })
+    }
+
+    function editClass(Id) {
+        $.ajax({
+            type: "POST",
+            url: "edit-class.php",
+            data: {
+                id: Id
+            },
+            success: function(response) {
+                $("body").html(response);
+            }
+        });
+    }
+</script>
 
 <?php
 include pathOf("./includes/footer.php");

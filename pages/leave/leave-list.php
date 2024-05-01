@@ -6,7 +6,7 @@ include pathof("./includes/sidebar.php");
 
 $query = "SELECT * FROM `leave`";
 $queryUser = "SELECT `Id`,`Name` FROM `users`";
-
+$index = 0;
 $dataUser = select($queryUser); 
 $data = select($query); 
 ?>
@@ -53,7 +53,8 @@ $data = select($query);
                                 <tbody>
                                     <?php foreach ($data as $row ) {?>
                                     <tr>
-                                            <td><?=$row['Id']?></td>
+
+                                            <td><?= $index += 1 ?></td>
                                                 <td>
                                                     <h2>
                                                         <a><?=$row['UserId']?></a>
@@ -64,10 +65,10 @@ $data = select($query);
                                                     <td><?=$row['Reason']?></td>
                                                     <td class="text-center">
                                                         <div class="actions ml-2">
-                                                            <a href="edit-Leave.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light mr-2">
+                                                            <a onclick="editLeave((<?=$row['Id']?>))" class="btn btn-sm bg-success-light mr-2">
                                                                 <i class="fas fa-pen"></i>
                                                             </a>
-                                                            <a href="../../api/leaves/deleteLeave.php?id=<?=$row['Id']?>" onclick="return confirm('Are you sure to delete this role')" class="btn btn-sm bg-danger-light">
+                                                            <a onclick="deleteLeave(<?=$row['Id']?>)" class="btn btn-sm bg-danger-light">
                                                                 <i class="fas fa-trash"></i>
                                                             </a>
                                                         </div>
@@ -84,6 +85,36 @@ $data = select($query);
         </div>
     </div>
 
+    <script>
+    function deleteLeave(Id)
+    {
+        if(confirm("are you sure you want to delete this role"));
+        $.ajax({
+            url: "../../api/leaves/deleteLeave.php",
+            method : "POST",
+            data  : {
+                id : Id
+            },
+            success: function(response){
+                    if(response)
+                    location.reload();
+            }
+        })
+    }
+
+    function editLeave(Id) {
+        $.ajax({
+            type: "POST",
+            url: "edit-leave.php",
+            data: {
+                id: Id
+            },
+            success: function(response) {
+                $("body").html(response);
+            }
+        });
+    }
+</script>
     <?php
     include pathOf("./includes/footer.php");
     include pathOf("./includes/pageend.php");

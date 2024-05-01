@@ -5,7 +5,7 @@ include pathof("./includes/sidebar.php");
 
 
 $query = "SELECT * FROM `modules`";
-
+$index = 0;
 $data = select($query);
 ?>
 
@@ -42,20 +42,20 @@ $data = select($query);
                         <tbody>
                            <?php foreach($data as $row){?>
                               <tr>
-                                 <td><?=$row['Id']?></td>
+                                 <td><?=$index += 1?></td>
                                  <td>
                                     <h2>
                                        <a><?=$row['Name']?></a>
                                     </h2>
                                  </td>
                                  <td class="text-left">
-                                            <a href="edit-module.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light ml-2">
+                                            <a onclick="editModule(<?=$row['Id']?>)" class="btn btn-sm bg-success-light ml-2">
                                                 <i class="fas fa-pen"></i>
 
                                             </a>
                                         </td>
                                         <td class="text-left">
-                                            <a href="../../api/modules/deleteModules.php?id=<?=$row['Id']?>" onclick="return confirm('Are you sure to delete this module')" class="btn btn-sm bg-danger-light ml-1">
+                                            <a onclick="deleteModule(<?=$row['Id']?>)" class="btn btn-sm bg-danger-light ml-1">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>
@@ -72,6 +72,36 @@ $data = select($query);
    </div>
 
 
+   <script>
+    function deleteModule(Id)
+    {
+        if(confirm("are you sure you want to delete this role"));
+        $.ajax({
+            url: "../../api/modules/deleteModules.php",
+            method : "POST",
+            data  : {
+                id : Id
+            },
+            success: function(response){
+                    if(response)
+                    location.reload();
+            }
+        })
+    }
+
+    function editModule(Id) {
+        $.ajax({
+            type: "POST",
+            url: "edit-module.php",
+            data: {
+                id: Id
+            },
+            success: function(response) {
+                $("body").html(response);
+            }
+        });
+    }
+</script>
    <?php
    include pathOf("./includes/footer.php");
    include pathOf("./includes/pageend.php");

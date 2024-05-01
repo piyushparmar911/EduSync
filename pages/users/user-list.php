@@ -4,7 +4,7 @@ include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
 
 $query = "SELECT * FROM `users`" ;
-
+$index = 0;
 $data = select($query);
 ?>
 
@@ -41,7 +41,6 @@ $data = select($query);
                                         <th>Name</th>
                                         <th>RoleId</th>
                                         <th>ClassId</th>
-                                        <th>Subject</th>
                                         <th>LastWork</th>
                                         <th>Experience</th>
                                         <th>Address</th>
@@ -53,17 +52,16 @@ $data = select($query);
                                     <?php foreach ($data as $row) {?>
 
                                         <tr>
-                                            <td><?=$row['Id']?></td>
+                                            <td><?=$index += 1?></td>
                                             <td><?=$row['Name']?></td>
                                             <td><?=$row['RoleId']?></td>
                                             <td><?=$row['ClassId']?></td>
-                                        <td><?=$row['Subject']?></td>
                                         <td><?=$row['LastWork']?></td>
                                         <td><?=$row['Experience']?></td>
                                         <td><?=$row['Address']?></td>
                                         <td class="text-center">
                                             <div class="ml-2">
-                                                <a href="edit-user.php?id=<?=$row['Id']?>" class="btn btn-sm bg-success-light mr-3">
+                                                <a onclick="editUser(<?=$row['Id']?>)"  class="btn btn-sm bg-success-light mr-3">
                                                     <i class="fas fa-pen"></i>
                                                 </a>
                                             </div>
@@ -71,7 +69,7 @@ $data = select($query);
                                                 
                                         <td class="text-center">
                                             <div class="ml-2">
-                                                <a href="../../api/users/deleteUser.php?id=<?=$row['Id']?>" onclick="return confirm('Are you sure to delete this user')" class="btn btn-sm bg-danger-light mr-3">
+                                                <a onclick="deleteUser(<?=$row['Id']?>)"  class="btn btn-sm bg-danger-light mr-3">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </div>
@@ -89,6 +87,38 @@ $data = select($query);
     </div>
 
 
+    <script>
+    function deleteUser(Id)
+    {
+        if(confirm("are you sure you want to delete this role"));
+        $.ajax({
+            url: "../../api/users/deleteUser.php",
+            method : "POST",
+            data  : {
+                id : Id
+            },
+            success: function(response){
+                    if(response)
+                    location.reload();
+            }
+        })
+    }
+
+    
+
+    function editUser(Id) {
+        $.ajax({
+            type: "POST",
+            url: "edit-user.php",
+            data: {
+                id: Id
+            },
+            success: function(response) {
+                $("body").html(response);
+            }
+        });
+    }
+</script>
 
     <?php
     include pathOf("./includes/footer.php");
