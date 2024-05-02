@@ -1,6 +1,6 @@
 <?php
 require '../../includes/init.php';
-$id = $_GET['id'];
+$id = $_POST['id'];
 
 $query = "DELETE FROM `event` WHERE `Id` = ?";
 

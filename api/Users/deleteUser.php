@@ -1,7 +1,7 @@
 <?php 
 require '../../includes/init.php';
 
-$Id = $_GET['id'];
+$Id = $_POST['id'];
 
 $query = "DELETE FROM `users` WHERE `Id` = ?";
 
