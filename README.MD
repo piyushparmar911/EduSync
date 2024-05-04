@@ -29,7 +29,7 @@ These instructions will help you get a copy of the project up and running on you
 
 ### Prerequisites
 
-To run EduSync locally, you'll need the following:
+To run EduSync you'll need the following:
 
 - **Web Server:** Apache, Nginx, or any other web server capable of serving PHP files.
 - **Database Server:** MySQL, MariaDB, or any other database server supported by PHP.
