@@ -1,7 +1,10 @@
 <?php
 require("../../includes/init.php");
-// if ($userPermission['AddPermission'] != 1)
-//     header("Location:./index");
+
+// Check user permissions (uncomment if needed)
+// // if ($userPermission['AddPermission'] != 1)
+// //     header("Location:./index");
+
 $userPermissionId = $_POST['Id'];
 $permissions = select("SELECT Modules.Name AS 'ModuleName', Modules.Id, Users.Name, Permissions.AddPermission, Permissions.EditPermission, Permissions.DeletePermission, Permissions.ViewPermission FROM Permissions INNER JOIN Modules ON Permissions.ModuleId = Modules.Id INNER JOIN Users ON Permissions.UserId = Users.Id WHERE Permissions.UserId =?", [$userPermissionId]);
 
@@ -9,11 +12,11 @@ $UserId = $_SESSION['UserId'];
 $userPermission = authenticate('Users', $UserId);
 
 $index = 0;
-include  pathOf("./includes/header.php");
-include pathof("./includes/sidebar.php");
+include pathOf("./includes/header.php");
+include pathOf("./includes/sidebar.php");
 ?>
 <div class="main-content my-5 py-5">
-    <div class="content-wraper-area">
+    <div class="content-wrapper-area my-5">
         <div class="data-table-area">
             <div class="container">
                 <div class="row g-4">
@@ -23,10 +26,7 @@ include pathof("./includes/sidebar.php");
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
                                     <h4 class="mb-0">User</h4>
                                     <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item active"> <a href="./add-user"
-                                                    class="btn btn-success mb-2 me-2">Add</a> </li>
-                                        </ol>
+                                        <a href="./add-user" class="btn btn-primary mb-2">Add</a>
                                     </div>
                                 </div>
                             </div>
@@ -44,6 +44,7 @@ include pathof("./includes/sidebar.php");
                                             <th>Edit Permission</th>
                                             <th>View Permission</th>
                                             <th>Delete Permission</th>
+                                            <th>Check All</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -52,27 +53,49 @@ include pathof("./includes/sidebar.php");
                                                 <input type="hidden" value="<?= $userPermissionId ?>" id="UserId">
                                                 <td><?= $index += 1 ?></td>
                                                 <td><?= $permission['ModuleName'] ?></td>
-                                                <td><input type="checkbox" id="addPermission"
-                                                        <?= $permission['AddPermission'] == 1 ? 'Checked' : '' ?>
-                                                        onchange="addPermission(<?= $permission['Id'] ?>, <?= $permission['AddPermission'] ?>)">
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input addPermission" type="checkbox" id="addPermission<?= $permission['Id'] ?>"
+                                                               <?= $permission['AddPermission'] == 1 ? 'checked' : '' ?>
+                                                               onchange="updatePermission('addPermission', <?= $permission['Id'] ?>, <?= $permission['AddPermission'] ?>)">
+                                                        <label class="form-check-label" for="addPermission<?= $permission['Id'] ?>"></label>
+                                                    </div>
                                                 </td>
-                                                <td><input type="checkbox" id="editPermission"
-                                                        <?= $permission['EditPermission'] == 1 ? 'Checked' : '' ?>
-                                                        onchange="editPermission(<?= $permission['Id'] ?>, <?= $permission['EditPermission'] ?>)">
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input editPermission" type="checkbox" id="editPermission<?= $permission['Id'] ?>"
+                                                               <?= $permission['EditPermission'] == 1 ? 'checked' : '' ?>
+                                                               onchange="updatePermission('editPermission', <?= $permission['Id'] ?>, <?= $permission['EditPermission'] ?>)">
+                                                        <label class="form-check-label" for="editPermission<?= $permission['Id'] ?>"></label>
+                                                    </div>
                                                 </td>
-                                                <td><input type="checkbox" id="viewPermission"
-                                                        <?= $permission['ViewPermission'] == 1 ? 'Checked' : '' ?>
-                                                        onchange="viewPermission(<?= $permission['Id'] ?>, <?= $permission['ViewPermission'] ?>)">
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input viewPermission" type="checkbox" id="viewPermission<?= $permission['Id'] ?>"
+                                                               <?= $permission['ViewPermission'] == 1 ? 'checked' : '' ?>
+                                                               onchange="updatePermission('viewPermission', <?= $permission['Id'] ?>, <?= $permission['ViewPermission'] ?>)">
+                                                        <label class="form-check-label" for="viewPermission<?= $permission['Id'] ?>"></label>
+                                                    </div>
                                                 </td>
-                                                <td><input type="checkbox" id="deletePermission"
-                                                        <?= $permission['DeletePermission'] == 1 ? 'Checked' : '' ?>
-                                                        onchange="deletePermission(<?= $permission['Id'] ?>, <?= $permission['DeletePermission'] ?>)">
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input deletePermission" type="checkbox" id="deletePermission<?= $permission['Id'] ?>"
+                                                               <?= $permission['DeletePermission'] == 1 ? 'checked' : '' ?>
+                                                               onchange="updatePermission('deletePermission', <?= $permission['Id'] ?>, <?= $permission['DeletePermission'] ?>)">
+                                                        <label class="form-check-label" for="deletePermission<?= $permission['Id'] ?>"></label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input checkAllRow" type="checkbox" id="checkAllRow<?= $permission['Id'] ?>"
+                                                               onchange="toggleRowPermissions(<?= $permission['Id'] ?>, this)">
+                                                        <label class="form-check-label" for="checkAllRow<?= $permission['Id'] ?>"></label>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
-
                             </div> <!-- end card body-->
                         </div> <!-- end card -->
                     </div>
@@ -86,78 +109,41 @@ include pathof("./includes/sidebar.php");
     include pathOf('includes/script.php');
     ?>
     <script>
-        function addPermission(moduleId, permission) {
-            let addPermission = permission == 1 ? 0 : 1;
+        function updatePermission(action, moduleId, permission) {
+            let newPermission = permission == 1 ? 0 : 1;
 
             let data = {
                 userId: $('#UserId').val(),
                 moduleId: moduleId,
-                addPermission: addPermission
-            }
+                [action]: newPermission
+            };
 
-            $.post('../../api/updatePermission.php?action=addPermission', data, function (response) {
+            $.post(`../../api/updatePermission.php?action=${action}`, data, function (response) {
                 console.log(response.success);
                 if (response.success !== true)
                     return;
 
-                window.location.reload();
+                // Optionally, update the checkbox state without reloading
+                document.getElementById(action + moduleId).checked = newPermission == 1;
             });
         }
 
-        function editPermission(moduleId, permission) {
-            let editPermission = permission == 1 ? 0 : 1;
-            
-            let data = {
-                userId: $('#UserId').val(),
-                moduleId: moduleId,
-                editPermission: editPermission
-            }
+        function toggleRowPermissions(moduleId, checkbox) {
+            let checkState = checkbox.checked;
+            let permissions = ['addPermission', 'editPermission', 'viewPermission', 'deletePermission'];
 
-            $.post('../../api/updatePermission.php?action=editPermission', data, function (response) {
-                console.log(response.success);
-                if (response.success !== true)
-                    return;
+            permissions.forEach(permission => {
+                let permissionCheckbox = document.getElementById(permission + moduleId);
+                if (permissionCheckbox) {
+                    permissionCheckbox.checked = checkState;
 
-                window.location.reload();
-            });
-        }
-
-        function deletePermission(moduleId, permission) {
-            let deletePermission = permission == 1 ? 0 : 1;
-
-            let data = {
-                userId: $('#UserId').val(),
-                moduleId: moduleId,
-                deletePermission: deletePermission
-            }
-
-            $.post('../../api/updatePermission.php?action=deletePermission', data, function (response) {
-                console.log(response.success);
-                if (response.success !== true)
-                    return;
-
-                window.location.reload();
-            });
-        }
-
-        function viewPermission(moduleId, permission) {
-            let viewPermission = permission == 1 ? 0 : 1;
-
-            let data = {
-                userId: $('#UserId').val(),
-                moduleId: moduleId,
-                viewPermission: viewPermission
-            }
-
-            $.post('../../api/updatePermission.php?action=viewPermission', data, function (response) {
-                console.log(response.success);
-                if (response.success !== true)
-                    return;
-
-                window.location.reload();
+                    // Trigger the onchange event to update the permission
+                    updatePermission(permission, moduleId, checkState ? 0 : 1);
+                }
             });
         }
     </script>
     <?php
     include pathOf('includes/pageEnd.php');
     ?>
+</div>
