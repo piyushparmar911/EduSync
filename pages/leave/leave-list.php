@@ -4,6 +4,9 @@ include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
 
 
+
+$UserId = $_SESSION['UserId'];
+$permissions = authenticate('Leave', $UserId);
 $query = "SELECT * FROM `leave`";
 $queryUser = "SELECT `Id`,`Name` FROM `users`";
 $index = 0;
@@ -25,12 +28,11 @@ $data = select($query);
                         <li class="breadcrumb-item active">Leaves</li>
                     </ul>
                 </div>
-                <div class="col-auto text-right float-right ml-auto">
-                    <a href="manage-leave.php" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                </div>
+                <?php if ($permissions['AddPermission'] == 1) { ?>
                 <div class="col-auto text-right float-right ml-auto">
                     <a href="add-leave.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                 </div>
+                <?php } ?>
             </div>
         </div>
 
@@ -47,11 +49,17 @@ $data = select($query);
                                         <th>Started Date</th>
                                         <th>End date</th>
                                         <th>Reason</th>
-                                        <th class="text-center">status</th>
+                                        <?php if ($permissions['EditPermission'] == 1) { ?>
+                                                <th>Modify</th>
+                                            <?php } ?>
+                                            <?php if ($permissions['DeletePermission'] == 1) { ?>
+                                                <th>Delete</th>
+                                            <?php } ?>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($data as $row ) {?>
+                                <?php if ($permissions['ViewPermission'] == 1) {
+                                            foreach ($data as $row): ?>
                                     <tr>
 
                                             <td><?= $index += 1 ?></td>
@@ -63,18 +71,31 @@ $data = select($query);
                                                     <td><?=$row['DateStart']?></td>
                                                     <td><?=$row['DateEnd']?></td>
                                                     <td><?=$row['Reason']?></td>
-                                                    <td class="text-center">
-                                                        <div class="actions ml-2">
-                                                            <a onclick="editLeave((<?=$row['Id']?>))" class="btn btn-sm bg-success-light mr-2">
-                                                                <i class="fas fa-pen"></i>
-                                                            </a>
-                                                            <a onclick="deleteLeave(<?=$row['Id']?>)" class="btn btn-sm bg-danger-light">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                    <?php  }?>
-                                        </tr>
+                                                    <!-- <td class="text-center"> -->
+
+                                                                                                                <?php if ($permissions['EditPermission'] == 1) { ?>
+                                          <td>
+                                                           <form action="./edit-leave" method="post">
+                                                            <input type="hidden" name="id"
+                                                                value="<?= $row['Id'] ?>">
+                                                            <button type="submit" class="btn ml-2 btn-info btn-circle mb-2">
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                         </form>
+                                                        </td>
+                                                    <?php } ?>
+                                                    <?php if ($permissions['DeletePermission'] == 1) { ?>
+                                                    <td>
+                                                        <button type="submit" class="btn ml-2 btn-primary btn-circle mb-2"
+                                                            onclick="deleteLeave(<?= $row['Id'] ?>)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    <!-- </td> -->
+                                                    <?php } ?>
+                                                </tr>
+                                            <?php endforeach;
+                                        } ?>
+
                                     
                                 </tbody>
                             </table>
@@ -102,18 +123,6 @@ $data = select($query);
         })
     }
 
-    function editLeave(Id) {
-        $.ajax({
-            type: "POST",
-            url: "edit-leave.php",
-            data: {
-                id: Id
-            },
-            success: function(response) {
-                $("body").html(response);
-            }
-        });
-    }
 </script>
     <?php
     include pathOf("./includes/footer.php");
