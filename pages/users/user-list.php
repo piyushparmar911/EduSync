@@ -80,7 +80,7 @@ include pathof("./includes/sidebar.php");
 
                                                         <form action="./edit-user" method="post">
                                                             <td>
-                                                                <input type="hidden" name="Id" id="Id" value="<?= $row['Id'] ?>">
+                                                                <input type="hidden" name="Id" value="<?= $row['Id'] ?>">
                                                                 <button type="submit" class="btn ml-2 btn-primary btn-circle mb-2">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>

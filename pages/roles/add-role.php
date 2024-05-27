@@ -3,6 +3,10 @@ require("../../includes/init.php");
 include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
 
+$UserId = $_SESSION['UserId'];
+$permissions = authenticate('Subject', $UserId);
+if ($permissions['AddPermission'] != 1)
+    header('Location: ./index');
 ?>
 
 

@@ -4,6 +4,8 @@ include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
 
 
+$UserId = $_SESSION['UserId'];
+$permissions = authenticate('Subjects', $UserId);
 $query = "SELECT * FROM `subjects`" ;
 $index = 0;
 $data = select($query);
@@ -20,9 +22,11 @@ $data = select($query);
                            <li class="breadcrumb-item active">Subjects</li>
                         </ul>
                      </div>
-                     <div class="col-auto text-right float-right ml-auto">
-                        <a href="add-subject.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
-                     </div>
+                     <?php if ($permissions['AddPermission'] == 1) { ?>
+                <div class="col-auto text-right float-right ml-auto">
+                    <a href="add-subject.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                </div>
+                <?php } ?>
                   </div>
                </div>
                <div class="row">
@@ -36,13 +40,18 @@ $data = select($query);
                                        <th>Sr No</th>
                                        <th>Name</th>
                                        <th>Class Id</th>
-                                       <th>Modify</th>
-                                       <th>Delete</th>
+                                       <?php if ($permissions['EditPermission'] == 1) { ?>
+                                                <th>Modify</th>
+                                            <?php } ?>
+                                            <?php if ($permissions['DeletePermission'] == 1) { ?>
+                                                <th>Delete</th>
+                                            <?php } ?>
                                     </tr>
                                     
                                  </thead>
                                  <tbody>
-                                       <?php foreach ($data as $row) {  ?>
+                                 <?php if ($permissions['ViewPermission'] == 1) {
+                                    foreach ($data as $row): ?>
                                        <tr>
                                           <td><?=$index += 1?></td>
                                           <td>
@@ -51,19 +60,32 @@ $data = select($query);
                                              </h2>
                                           </td>
                                           <td><?=$row['ClassId']?></td>
-                                          <td class="text-left">
-                                             <a onclick="editSubject(<?=$row['Id']?>)" class="btn btn-sm bg-success-light ml-2">
-                                                <i class="fas fa-pen"></i>
-                                                
-                                             </a>
+                                          <?php if ($permissions['EditPermission'] == 1) { ?>
+
+                                       <form action="./edit-subject" method="post">
+                                                       <td>
+                                                           <input type="hidden" name="id" id="Id" value="<?= $row['Id'] ?>">
+                                                           <button type="submit" class="btn  about-info ml-1 btn-info btn-circle mb-2">
+                                                               <i class="fa fa-edit"></i>
+                                                           </button>
+                                                       </td>
+                                                   </form>
+                                               <?php } ?>
+
+                                               <?php if ($permissions['DeletePermission'] == 1) { ?>
+                                             
+                                           <td>
+                                               <button type="submit" class="btn btn-primary ml-1 btn-circle mb-2"
+                                                   onclick="deleteSubject(<?= $row['Id'] ?>)">
+                                                   <i class="fas fa-trash"></i>
+                                               </button>
+                                           </td>
+                                           <?php } ?>
+                                           </tr>
+                                           <?php endforeach;
+                                       } ?>
                                           </td>
-                                          <td class="text-left">
-                                             <a onclick="deleteSubject(<?=$row['Id']?>)" class="btn btn-sm bg-danger-light ml-2">
-                                                <i class="fas fa-trash"></i>
-                                             </a>
-                                             </td>
-                                          </tr>
-                                          <?php }?>
+    
                                           
                                  </tbody>
                               </table>
@@ -93,18 +115,7 @@ $data = select($query);
     }
 
     
-    function editSubject(Id) {
-        $.ajax({
-            type: "POST",
-            url: "edit-subject.php",
-            data: {
-                id: Id
-            },
-            success: function(response) {
-                $("body").html(response);
-            }
-        })
-    }
+   
 </script>
 <?php
 include pathOf("./includes/footer.php");

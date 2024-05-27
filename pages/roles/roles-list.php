@@ -21,9 +21,11 @@ include pathOf("./includes/sidebar.php");
                         <li class="breadcrumb-item active">Roles</li>
                     </ul>
                 </div>
+                <?php if ($permissions['AddPermission'] == 1) { ?>
                 <div class="col-auto text-right float-right ml-auto">
                     <a href="add-role.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                 </div>
+                <?php } ?>
             </div>
         </div>
         <div class="row">
@@ -57,8 +59,8 @@ include pathOf("./includes/sidebar.php");
 
                                             <form action="./edit-role" method="post">
                                                             <td>
-                                                                <input type="hidden" name="Id" id="Id" value="<?= $role['Id'] ?>">
-                                                                <button type="submit" class="btn btn-primary btn-circle mb-2">
+                                                                <input type="hidden" name="id" id="Id" value="<?= $role['Id'] ?>">
+                                                                <button type="submit" class="btn btn-info btn-circle mb-2">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </td>
@@ -68,7 +70,7 @@ include pathOf("./includes/sidebar.php");
                                                     <?php if ($permissions['DeletePermission'] == 1) { ?>
 
                                                 <td>
-                                                    <button type="submit" class="btn btn-danger btn-circle mb-2"
+                                                    <button type="submit" class="btn btn-primary btn-circle mb-2"
                                                         onclick="deleteRole(<?= $role['Id'] ?>)">
                                                         <i class="fas fa-trash"></i>
                                                     </button>

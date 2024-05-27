@@ -1,15 +1,13 @@
 <?php
 require("../../includes/init.php");
-include  pathOf("./includes/header.php");
-include pathof("./includes/sidebar.php");
 $UserId = $_SESSION['UserId'];
 $permissions = authenticate('Class', $UserId);
-if ($permissions['AddPermission'] != 1)
-    header('Location: ./index');
 
 $Id = $_POST['id'];
 
 $data = selectOne("SELECT * FROM `Class` WHERE `id` = '$Id'");
+include  pathOf("./includes/header.php");
+include pathof("./includes/sidebar.php");
 ?>
 
 
