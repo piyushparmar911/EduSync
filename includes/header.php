@@ -46,13 +46,7 @@ if (!isset($_SESSION['LoggedIn'])) {
                      <i class="fas fa-gear"></i>
                   </a>
                   <div class="dropdown-menu">
-                     <div class="user-header">
-                        
-                        <div class="user-text">
-                           </h6></h6>
-                           <p class="text-muted mb-0">Administrator</p>
-                        </div>
-                     </div >
+                     
                      <div class="user-header">
 
                         <a class="dropdown-item" href=<?=urlOf("api/logout")?>>Logout 
