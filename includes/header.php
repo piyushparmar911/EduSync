@@ -4,6 +4,7 @@ $url = urlOf('pages/login');
 if (!isset($_SESSION['LoggedIn'])) {
     header("Location: $url");
     exit;
+
 }
 
 ?>
@@ -37,26 +38,27 @@ if (!isset($_SESSION['LoggedIn'])) {
                </a>
             </div>
             <a href="javascript:void();" id="toggle_btn">
-            <i class="fas fa-align-left"></i>
+               <i class="fas fa-align-left"></i>
             </a>
             <ul class="nav user-menu">
                <li class="nav-item dropdown has-arrow">
-                  <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                  <span class="user-img"><img class="rounded-circle" src="<?=urlOf("assets/img/profiles/avatar-01.jpg")?>" width="31" alt="Ryan Taylor"></span>
+                  <a href="#" class=" nav-link" data-toggle="dropdown">
+                     <i class="fas fa-gear"></i>
                   </a>
                   <div class="dropdown-menu">
                      <div class="user-header">
-                        <div class="avatar avatar-sm">
-                           <img src="<?=urlOf("assets/img/profiles/avatar-01.jpg")?>" alt="User Image" class="avatar-img rounded-circle">
-                        </div>
+                        
                         <div class="user-text">
-                           <h6>Ryan Taylor</h6>
+                           </h6></h6>
                            <p class="text-muted mb-0">Administrator</p>
                         </div>
+                     </div >
+                     <div class="user-header">
+
+                        <a class="dropdown-item" href=<?=urlOf("api/logout")?>>Logout 
+                           &nbsp;   <i class="fas fa-sign-out"></i>
+                        </a>
                      </div>
-                     <a class="dropdown-item" href="profile.html">My Profile</a>
-                     <a class="dropdown-item" href="inbox.html">Inbox</a>
-                     <a class="dropdown-item" href="login.html">Logout</a>
                   </div>
                </li>
             </ul>

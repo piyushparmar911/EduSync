@@ -6,6 +6,7 @@ include pathof("./includes/sidebar.php");
 $UserId = $_SESSION['UserId'];
 $permissions = authenticate('Department', $UserId);
 
+
 $Id = $_POST['id'];
 $query = "SELECT * FROM `roles` WHERE `Id` = '$Id'";
 

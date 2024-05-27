@@ -3,12 +3,13 @@ require ("./includes/init.php");
 include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
 
-$queryU = "SELECT * FROM `users`" ;
-$query = "SELECT * FROM `event`";
-$queryUser = "SELECT `Id`,`Name` FROM `users`";
+$query = "
+    SELECT event.*, users.Name AS UserName
+    FROM event
+    INNER JOIN users ON event.UserId = users.Id
+";
+$queryu= select("SELECT * from `users`");
 
-$dataUser = select($queryUser); 
-$dataU = select($queryU); 
 $data = select($query);
 
 ?>        
@@ -167,7 +168,7 @@ $data = select($query);
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($dataU as $row) {?>
+                                    <?php foreach ($queryu as $row) {?>
 
                                         <tr>
                                             <td><?=$row['Id']?></td>
@@ -211,7 +212,7 @@ $data = select($query);
                                                     <a><?=$row['Name']?></a>
                                                 </h2>
                                             </td>
-                                                <td><?=$row['UserId']?></td>
+                                                <td><?=$row['UserName']?></td>
                                                     <td><?=$row['DateTime']?></td>
                                                     <td><?=$row['Place']?></td>
                                                     

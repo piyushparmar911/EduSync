@@ -4,6 +4,9 @@ include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
 
 
+
+$UserId = $_SESSION['UserId'];
+$permissions = authenticate('Department', $UserId);
 $Id = $_POST['id'];
 $query = "SELECT * FROM `event` WHERE `Id` = '$Id'";
 $queryUser = "SELECT `Id`, `Name` FROM `users`";

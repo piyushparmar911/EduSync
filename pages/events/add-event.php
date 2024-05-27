@@ -3,6 +3,8 @@ require("../../includes/init.php");
 include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
 
+$UserId = $_SESSION['UserId'];
+$permissions = authenticate('Subject', $UserId);
 
 $queryUser ="SELECT `Id`,`Name` FROM `users` ";
 

@@ -43,9 +43,6 @@
                         <a href="<?=urlOf("pages/roles/roles-list.php")?>" accesskey="r"><h5 class="fas fa-gear"></h5> <span><h5> Roles</h5></span></a>
                      </li>
 
-                     <li class="module">
-                        <a href="<?=urlOf("pages/modules/modules-list.php")?>" accesskey="m"><h5 class="fas fa-building-lock"></h5> <span><h5>Modules</h5></span></a>
-                     </li>
                      
                      </li>
                      
