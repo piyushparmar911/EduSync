@@ -1,11 +1,12 @@
 <?php
 require("../../includes/init.php");
-include  pathOf("./includes/header.php");
-include pathof("./includes/sidebar.php");
-
+$UserId = $_SESSION['UserId'];
+$permissions = authenticate('Users', $UserId);
 $query = "SELECT * FROM `users`" ;
 $index = 0;
 $data = select($query);
+include  pathOf("./includes/header.php");
+include pathof("./includes/sidebar.php");
 ?>
 
 
@@ -23,9 +24,11 @@ $data = select($query);
                         <li class="breadcrumb-item active">Users</li>
                     </ul>
                 </div>
+                <?php if ($permissions['AddPermission'] == 1) { ?>
                 <div class="col-auto text-right float-right ml-auto">
                     <a href="<?= "add-user.php" ?>" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                 </div>
+                <?php } ?>
             </div>
         </div>
 
@@ -44,13 +47,17 @@ $data = select($query);
                                         <th>LastWork</th>
                                         <th>Experience</th>
                                         <th>Address</th>
-                                        <th class="text-center">Modify</th>
-                                        <th class="text-center">Delete</th>
+                                        <?php if ($permissions['EditPermission'] == 1) { ?>
+                                                <th class="">Permission</th>
+                                            <?php } ?>
+                                            <?php if ($permissions['DeletePermission'] == 1) { ?>
+                                                <th class="">Modify</th>
+                                            <?php } ?>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($data as $row) {?>
-
+                                <?php if ($permissions['ViewPermission'] == 1) {
+                                    foreach ($data as $row): ?>
                                         <tr>
                                             <td><?=$index += 1?></td>
                                             <td><?=$row['Name']?></td>
@@ -59,24 +66,30 @@ $data = select($query);
                                         <td><?=$row['LastWork']?></td>
                                         <td><?=$row['Experience']?></td>
                                         <td><?=$row['Address']?></td>
-                                        <td class="text-center">
-                                            <div class="ml-2">
-                                                <a onclick="editUser(<?=$row['Id']?>)"  class="btn btn-sm bg-success-light mr-3">
-                                                    <i class="fas fa-pen"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                                
-                                        <td class="text-center">
-                                            <div class="ml-2">
-                                                <a onclick="deleteUser(<?=$row['Id']?>)"  class="btn btn-sm bg-danger-light mr-3">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </div>
-                                        </td>
+                                        <?php if ($permissions['EditPermission'] == 1) { ?>
+                                                        <form action="./permission" method="post">
+                                                            <td>
+                                                                <input type="hidden" name="Id" id="Id" value="<?= $row['Id'] ?>">
+                                                                <button type="submit" class="btn ml-3 btn-secondary btn-circle mb-2">
+                                                                    <i class="fa fa-lock"></i>
+                                                                </button>
+                                                            </td>
+                                                        </form>
+                                                    <?php } ?>
+                                                    <?php if ($permissions['EditPermission'] == 1) { ?>
+
+                                                        <form action="./edit-user" method="post">
+                                                            <td>
+                                                                <input type="hidden" name="Id" id="Id" value="<?= $row['Id'] ?>">
+                                                                <button type="submit" class="btn ml-2 btn-primary btn-circle mb-2">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </button>
+                                                            </td>
+                                                        </form>
+                                                    <?php } ?>
                                     </tr>
-                                    <?php }?>
-                                    
+                                    <?php endforeach;
+                                        } ?>
                                 </tbody>
                             </table>
                         </div>

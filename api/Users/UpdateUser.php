@@ -20,3 +20,4 @@ $query = "UPDATE `users` SET  `RoleId` = ? , `Name` = ?,`ClassId` = ?  ,`Subject
 
 
 $result = execute($query,[$RoleId,$Name,$ClassId,$Subject,$Address,$Password,$Experience,$ExperienceGain, $LastDegree,$LastWork,$Salary,$Id]);
+?>

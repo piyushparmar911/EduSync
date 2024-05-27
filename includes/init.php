@@ -6,7 +6,7 @@ define("BASE_URL", "/EduSync");
 
 date_default_timezone_set('Asia/Kolkata');
 
-$connection = new PDO("mysql:host=localhost;port=3306;dbname=ManagementDb", "root", "");
+$connection = new PDO("mysql:host=localhost;port=3306;dbname=EduSync", "root", "");
 
 function pathOf($path)
 {
@@ -58,6 +58,16 @@ function getLastError()
 {
     global $connection;
     return $connection->errorInfo();
+}
+
+function authenticate($moduleName, $userId)
+{
+    global $connection;
+    $statement = $connection->prepare("SELECT permissions.AddPermission, permissions.EditPermission, permissions.DeletePermission, permissions.ViewPermission FROM permissions INNER JOIN users ON users.Id = permissions.UserId INNER JOIN modules ON modules.Id = permissions.ModuleId WHERE modules.Name = ? AND users.Id = ?");
+    $statement->execute([$moduleName, $userId]);
+
+    $rows = $statement->fetch(PDO::FETCH_ASSOC);
+    return $rows;
 }
 
 session_start();

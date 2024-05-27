@@ -4,6 +4,10 @@
     include pathof("./includes/sidebar.php");
 
 
+    $UserId = $_SESSION['UserId'];
+    $permissions = authenticate('Users', $UserId);
+    if ($usersPermission['EditPermission'] != 1)
+        header("Location:./index");
     $Id = $_POST['id'];
 
     $query = "SELECT * FROM `users` WHERE `Id` = '$Id'";
@@ -53,7 +57,7 @@
                                         <div class="form-group ">
                                             <label>Role ID</label>
                                             <select id="RoleId" class="form-control">
-                                                <?php foreach ($resultrole as $role) : ?>
+                                                <?php foreach ($data as $role) : ?>
                                                     <option><?=$role['Id'] ?> - <?=$role['Name'] ?></option>
                                                     <?= $role['Id'] , $role['Name'] ?>
                                                 <?php endforeach; ?>
@@ -63,7 +67,7 @@
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input type="text" class="form-control" id="Name" value="<?= $data['Name'] ?>">
+                                            <input type="text" class="form-control" id="Name" value="<?= $role['Name'] ?>">
                                         </div>
                                     </div>
 

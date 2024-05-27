@@ -3,6 +3,9 @@ require("../../includes/init.php");
 include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
 
+
+$UserId = $_SESSION['UserId'];
+$permissions = authenticate('Department', $UserId);
 $query = "SELECT * FROM `departments`";
 $index = 0;
 $data = select($query); 
@@ -22,9 +25,11 @@ $data = select($query);
                         <li class="breadcrumb-item active">Departments</li>
                     </ul>
                 </div>
+                <?php if ($permissions['AddPermission'] == 1) { ?>
                 <div class="col-auto text-right float-right ml-auto">
                     <a href="add-department.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                 </div>
+                <?php } ?>
             </div>
         </div>
 
@@ -41,12 +46,19 @@ $data = select($query);
                                         <th>User Id (Hod)</th>
                                         <th>Started Year</th>
                                         <th>No of Students</th>
-                                        <th>Modify</th>
-                                        <th>Delete</th>
+                                        <?php if ($permissions['EditPermission'] == 1) { ?>
+                                                <th class="pr-2">Modify</th>
+                                            <?php } ?>
+                                            <?php if ($permissions['DeletePermission'] == 1) { ?>
+                                                <th class="pr-2">Delete</th>
+                                            <?php } ?>
+                               
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($data as $row) {?>
+                                    
+                                <?php if ($permissions['ViewPermission'] == 1) {
+                                            foreach ($data as $row): ?>
 
                                         <tr>
                                             <td><?=$index += 1?></td>
@@ -58,19 +70,30 @@ $data = select($query);
                                             <td><?=$row['UserId']?></td>
                                             <td><?=$row['StartedYear']?></td>
                                             <td><?=$row['NoOfStudent']?></td>
-                                            <td class="text-left">
-                                                <a onclick="editDepartment(<?=$row['Id']?>)" class="btn btn-sm bg-success-light ml-2">
-                                                    <i class="fas fa-pen"></i>
-                                                    
-                                                </a>
-                                            </td>
-                                            <td class="text-left">
-                                                <a onclick="deleteDepartment(<?=$row['Id']?>)" class="btn btn-sm bg-danger-light ml-2">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <?php } ?>
+                                            <!-- <td class="text-left"> -->
+                                            <?php if ($permissions['EditPermission'] == 1) { ?>
+                                          <td>
+                                                           <form action="./edit-department" method="post">
+                                                            <input type="hidden" name="id"
+                                                                value="<?= $row['Id'] ?>">
+                                                            <button type="submit" class="btn ml-1 btn-info btn-circle mb-2">
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                         </form>
+                                                        </td>
+                                                    <?php } ?>
+                                                    <?php if ($permissions['DeletePermission'] == 1) { ?>
+                                                    <td>
+                                                        <button type="submit" class="btn ml-1 btn-primary btn-circle mb-2"
+                                                            onclick="deleteDepartment(<?= $row['Id'] ?>)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    <!-- </td> -->
+                                                    <?php } ?>
+                                                </tr>
+                                            <?php endforeach;
+                                        } ?>
+                                    
                                     
                                 </tbody>
                             </table>
@@ -98,18 +121,6 @@ $data = select($query);
         })
     }
 
-    function editDepartment(Id) {
-        $.ajax({
-            type: "POST",
-            url: "edit-department.php",
-            data: {
-                id: Id
-            },
-            success: function(response) {
-                $("body").html(response);
-            }
-        });
-    }
 </script>
     <?php
     include pathOf("./includes/footer.php");

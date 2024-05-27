@@ -1,6 +1,7 @@
-CREATE DATABASE `ManagementDb`;
+CREATE DATABASE `EduSync`;
 
-USE `ManagementDb`;
+USE `EduSync`;
+
 CREATE TABLE
     `Modules` (
         `Id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -35,12 +36,13 @@ CREATE TABLE
 
 CREATE TABLE
     `Permissions` (
-        `ADD` BOOLEAN,
-        `Delete` BOOLEAN,
-        `Select` BOOLEAN,
-        `View` BOOLEAN,
-        `ModuleId` INT NOT NULL,
+        `Id` INT PRIMARY KEY AUTO_INCREMENT,
         `UserId` INT NOT NULL,
+        `ModuleId` INT NOT NULL,
+        `AddPermission` INT NOT NULL,
+        `EditPermission` INT NOT NULL,
+        `DeletePermission` INT NOT NULL,
+        `ViewPermission` INT NOT NULL,
         FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`),
         FOREIGN KEY (`ModuleId`) REFERENCES `Modules` (`Id`)
     );
@@ -105,3 +107,77 @@ CREATE TABLE
         `Status` VARCHAR(255) NOT NULL,
         FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`)
     );
+
+
+    INSERT INTO
+    `Roles` (`Name`)
+VALUES
+    ('Admin'),
+    ('lecturer'),
+    ('lab incharge'),
+    ('Staff');
+
+
+INSERT INTO
+    `Users` (
+        `Id`,
+        `RoleId`,
+        `Name`,
+        `classId`,
+        `Subject`,
+        `Address`,
+        `Password`,
+        `Experience`,
+        `ExperienceGain`,
+        `LastDegree`,
+        `LastWork`,
+        `Salary`
+    )
+VALUES
+    (
+        1,
+        1,
+        'OwnerName',
+        '789',
+        'Testing',
+        'This is the testing address',
+        'xyz',
+        '10',
+        '5',
+        'B.E',
+        'Testing',
+        '10000'
+
+    );
+
+INSERT INTO
+    `Modules` (`Name`)
+VALUES
+    ('Roles'),
+    ('Class'),
+    ('department'),
+    ('Events'),
+    ('Leave'),
+    ('Subjects'),
+    ('Users')
+
+INSERT INTO
+    `Permissions` (
+        `UserId`,
+        `ModuleId`,
+        `AddPermission`,
+        `EditPermission`,
+        `DeletePermission`,
+        `ViewPermission`
+    )
+VALUES
+    (1, 1, 1, 1, 1, 1),
+    (1, 2, 1, 1, 1, 1),
+    (1, 3, 1, 1, 1, 1),
+    (1, 4, 1, 1, 1, 1),
+    (1, 5, 1, 1, 1, 1),
+    (1, 6, 1, 1, 1, 1),
+    (1, 7, 1, 1, 1, 1),
+    (1, 8, 1, 1, 1, 1),
+    (1, 9, 1, 1, 1, 1),
+    (1, 10, 1, 1, 1, 1);

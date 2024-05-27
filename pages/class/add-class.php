@@ -1,5 +1,11 @@
 <?php
 require ("../../includes/init.php");
+
+$UserId = $_SESSION['UserId'];
+$permissions = authenticate('Class', $UserId);
+if ($permissions['AddPermission'] != 1)
+    header('Location: ./index');
+
 include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
 ?>

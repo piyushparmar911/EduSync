@@ -1,12 +1,13 @@
 <?php
 require("../../includes/init.php");
+$UserId = $_SESSION['UserId'];
+$permissions = authenticate('Roles', $UserId);
+$query = "SELECT * FROM roles";
+$roles = select($query);
+$index = 0;
 include pathOf("./includes/header.php");
 include pathOf("./includes/sidebar.php");
 
-$query = "SELECT * FROM `roles`";
-$index = 0;
-
-$data = select($query);
 ?>
 
 <div class="page-wrapper">
@@ -35,26 +36,47 @@ $data = select($query);
                                     <tr>
                                         <th>Sr No</th>
                                         <th>Role Name</th>
-                                        <th>Modify</th>
-                                        <th>Delete</th>
+                                        
+                                        <?php if ($permissions['EditPermission'] == 1) { ?>
+                                                <th>Modify</th>
+                                            <?php } ?>
+                                            <?php if ($permissions['DeletePermission'] == 1) { ?>
+                                                <th>Delete</th>
+                                            <?php } ?>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($data as $row) { ?>
+                                <?php if ($permissions['ViewPermission'] == 1) {
+                                    foreach ($roles as $role): ?>
                                         <tr>
                                             <td><?= $index += 1 ?></td>
                                             <td>
-                                                <h2><a><?= $row['Name'] ?></a></h2>
+                                                <h2><a><?= $role['Name'] ?></a></h2>
                                             </td>
-                                            <td class="text-left">
-                                                <a onclick="editRole(<?=$row['Id']?>)" class="btn btn-sm bg-success-light ml-2"><i class="fas fa-pen"></i></a>
-                                            </td>
-                                            <td class="text-left">
-                                                <a  onclick="deleteRole(<?=$row['Id']?>)" class="btn btn-sm bg-danger-light ml-2">
-                                                <i class="fas fa-trash"></i></a>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
+                                            <?php if ($permissions['EditPermission'] == 1) { ?>
+
+                                            <form action="./edit-role" method="post">
+                                                            <td>
+                                                                <input type="hidden" name="Id" id="Id" value="<?= $role['Id'] ?>">
+                                                                <button type="submit" class="btn btn-primary btn-circle mb-2">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </button>
+                                                            </td>
+                                                        </form>
+                                                    <?php } ?>
+
+                                                    <?php if ($permissions['DeletePermission'] == 1) { ?>
+
+                                                <td>
+                                                    <button type="submit" class="btn btn-danger btn-circle mb-2"
+                                                        onclick="deleteRole(<?= $role['Id'] ?>)">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                                <?php } ?>
+                                                </tr>
+                                                <?php endforeach;
+                                        } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -78,18 +100,6 @@ $data = select($query);
                     location.reload();
             }
         })
-    }
-    function editRole(roleId) {
-        $.ajax({
-            type: "POST",
-            url: "edit-role.php",
-            data: {
-                id: roleId
-            },
-            success: function(response) {
-                $("body").html(response);
-            }
-        });
     }
 </script>
     <?php

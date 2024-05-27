@@ -1,15 +1,20 @@
 <?php
 require("../../includes/init.php");
-include  pathOf("./includes/header.php");
-include pathof("./includes/sidebar.php");
+
+$UserId = $_SESSION['UserId'];
+$permissions = authenticate('Users', $UserId);
+if ($permissions['AddPermission'] != 1)
+    header('Location: ./index');
+
 
 $queryrole = "SELECT `Id`, `Name` FROM `roles`";
-    $queryclass ="SELECT `Id`, `Name` FROM `class`";
-    $querySubject ="SELECT `Id`, `Name` FROM `subjects`";
-
-    $resultSubject = select($querySubject);
-    $resultrole = select($queryrole);
-    $resultclass = select($queryclass);
+$queryclass ="SELECT `Id`, `Name` FROM `class`";
+$querySubject ="SELECT `Id`, `Name` FROM `subjects`";
+$resultSubject = select($querySubject);
+$resultrole = select($queryrole);
+$resultclass = select($queryclass);
+include  pathOf("./includes/header.php");
+include pathof("./includes/sidebar.php");
 ?>
 <div class="page-wrapper">
     <div class="content container-fluid">
