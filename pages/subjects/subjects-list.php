@@ -102,7 +102,7 @@ $data = select($query);
     {
         if(confirm("are you sure you want to delete this role"));
         $.ajax({
-            url: "../../api/Subjects/deleteSubject.php",
+            url: "../../api/subjects/deleteSubject.php",
             method : "POST",
             data  : {
                 id : Id

@@ -54,7 +54,7 @@ $resultclass = select($queryclass);
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" onclick="insertdata()" class="btn btn-primary">Add</button>
+                                    <button type="button" onclick="insertdata()" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -66,15 +66,50 @@ $resultclass = select($queryclass);
 </div>
 </div>
 
+<!-- warning Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel"><h4 class="text-danger">Warning</h4></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Please fill the all fields.
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel"><h5 class="text-success">Success</h5></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Subject added successfully!
+      </div>
+    </div>
+  </div>
+</div>
 <script>
     function insertdata() {
         let Name = $('#Name').val(); 
         let ClassId = $('#ClassId').val();
 
         if (!Name.trim()) {
-            alert("Please enter module name first.");
-            return;
-        }
+        $('#errorModal').modal('show');
+        setTimeout(function() {
+            $('#errorModal').modal('hide');
+        }, 1500);
+        return;
+    }
 
         $.ajax({
             url: '../../api/subjects/insertSubject.php',
@@ -85,15 +120,22 @@ $resultclass = select($queryclass);
                 
             },
             success: function(response) {
-                console.log(response);
-                if (!response) {
-                    confirm("insert failed");
+                console.log(response); 
+                if (response.error) {
+                    alert("Error: " + response.message); 
                 } else {
-                    alert("Added successfully");
-                    window.location.href = "subjects-list.php";
+                    $('#successModal').modal('show');
+                    setTimeout(function() {
+                        $('#successModal').modal('hide');
+                        redirectToClassList(); 
+                    }, 1500);
                 }
             }
         });
+    }
+
+function redirectToClassList() {
+    window.location.href = 'subjects-list.php';
     }
 </script>
 
