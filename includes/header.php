@@ -47,7 +47,7 @@ if (!isset($_SESSION['LoggedIn'])) {
                   </a>
                   <div class="dropdown-menu">
                      
-                     <div class="user-header">
+                     <div class="">
 
                         <a class="dropdown-item" href=<?=urlOf("api/logout")?>>Logout 
                            &nbsp;   <i class="fas fa-sign-out"></i>
