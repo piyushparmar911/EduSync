@@ -43,26 +43,26 @@ include pathof("./includes/sidebar.php");
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Class Name</label>
+                                        <label>Class Name<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="text" class="form-control" id="Name" autofocus value="<?=$data['Name']?>">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Boys</label>
+                                        <label>Boys<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="number" class="form-control" id="Boys" value="<?=$data['Boys']?>">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Girls</label>
+                                        <label>Girls<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="number" class="form-control" id="Girls" value="<?=$data['Girls']?>">
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Total student</label>
+                                        <label>Total student<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="number" class="form-control" id="TotalStudents" value="<?=$data['TotalStudents']?>">
                                     </div>
 
@@ -85,7 +85,7 @@ include pathof("./includes/sidebar.php");
       <div class="modal-header">
         <h5 class="modal-title" id="errorModalLabel"><h4 class="text-danger">Warning</h4></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          
         </button>
       </div>
       <div class="modal-body">
@@ -99,9 +99,8 @@ include pathof("./includes/sidebar.php");
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="successModalLabel">Success</h5>
+        <h5 class="modal-title" id="successModalLabel"><h4 class="text-success">Success</h4></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">

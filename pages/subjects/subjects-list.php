@@ -24,7 +24,7 @@ $data = select($query);
                      </div>
                      <?php if ($permissions['AddPermission'] == 1) { ?>
                 <div class="col-auto text-right float-right ml-auto">
-                    <a href="add-subject.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                    <a href="add-subject.php" class="btn btn-primary"><i class="fas fa-plus" accesskey="+"></i></a>
                 </div>
                 <?php } ?>
                   </div>
@@ -66,7 +66,7 @@ $data = select($query);
                                                        <td>
                                                            <input type="hidden" name="id" id="Id" value="<?= $row['Id'] ?>">
                                                            <button type="submit" class="btn  about-info ml-1 btn-info btn-circle mb-2">
-                                                               <i class="fa fa-edit"></i>
+                                                               <i class="fa fa-edit" ></i>
                                                            </button>
                                                        </td>
                                                    </form>
@@ -76,7 +76,7 @@ $data = select($query);
                                              
                                            <td>
                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal<?= $row['Id'] ?>">
-                                                        <i class="fa fa-trash"></i>
+                                                        <i class="fa fa-trash" ></i>
                                                     </button>
 
                                                     <!-- Modal -->
@@ -95,7 +95,7 @@ $data = select($query);
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                     <?php if ($permissions['DeletePermission'] == 1) { ?>
-                                                                        <button type="button" class="btn btn-danger" onclick="deleteSubject(<?= $row['Id'] ?>)" autofocus>Delete</button>
+                                                                        <button type="button" class="btn btn-danger" onclick="deleteSubject(<?= $row['Id'] ?>)" >Delete</button>
                                                                     <?php } ?>
                                             </tr>
                                     <?php endforeach;

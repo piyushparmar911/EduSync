@@ -71,7 +71,7 @@ include pathof("./includes/sidebar.php");
                                                             <td>
                                                                 <input type="hidden" name="Id" id="Id" value="<?= $row['Id'] ?>">
                                                                 <button type="submit" class="btn ml-3 btn-secondary btn-circle mb-2">
-                                                                    <i class="fa fa-lock" accesskey="p"></i>
+                                                                    <i class="fa fa-lock"></i>
                                                                 </button>
                                                             </td>
                                                         </form>
@@ -82,7 +82,7 @@ include pathof("./includes/sidebar.php");
                                                             <td>
                                                                 <input type="hidden" name="Id" value="<?= $row['Id'] ?>">
                                                                 <button type="submit" class="btn ml-2 btn-primary btn-circle mb-2">
-                                                                    <i class="fa fa-edit" accesskey="m"></i>
+                                                                    <i class="fa fa-edit" ></i>
                                                                 </button>
                                                             </td>
                                                         </form>

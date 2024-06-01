@@ -49,7 +49,7 @@ $data = selectOne($query);
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>User Id</label>
+                                        <label>User Id<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <select id="UserId" class="form-control">
                                                 <?php foreach ($resultUser as $user) : ?>
                                                     <option><?=$user['Id'] ?> - <?=$user['Name'] ?></option>
@@ -60,19 +60,19 @@ $data = selectOne($query);
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Leave Start Date</label>
+                                        <label>Leave Start Date<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="date" class="form-control" id="DateStart" value="<?=$data['DateStart']?>">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Leave End Date</label>
+                                        <label>Leave End Date<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="date" class="form-control" id="DateEnd" value="<?=$data['DateEnd']?>">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Leave reason</label>
+                                        <label>Leave reason<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="text" class="form-control" id="Reason" value="<?=$data['Reason']?>">
                                     </div>
                                 </div>
@@ -95,9 +95,9 @@ $data = selectOne($query);
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="successModalLabel">Success</h5>
+        <h5 class="modal-title" id="successModalLabel"><h4 class="text-success">Success</h4></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          
         </button>
       </div>
       <div class="modal-body">
@@ -114,7 +114,7 @@ $data = selectOne($query);
       <div class="modal-header">
         <h5 class="modal-title" id="errorModalLabel"><h4 class="text-danger">Warning</h4></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          
         </button>
       </div>
       <div class="modal-body">

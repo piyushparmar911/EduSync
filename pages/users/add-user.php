@@ -42,7 +42,7 @@ include pathof("./includes/sidebar.php");
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group ">
-                                            <label>Role ID</label>
+                                            <label>Role ID<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                             <select id="RoleId" class="form-control">
                                                 <?php foreach ($resultrole as $role) : ?>
                                                     <option><?=$role['Id'] ?> - <?=$role['Name'] ?></option>
@@ -53,15 +53,15 @@ include pathof("./includes/sidebar.php");
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
-                                            <label>Name</label>
-                                            <input type="text" class="form-control" id="Name">
+                                            <label>Name<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
+                                            <input type="text"  class="form-control" id="Name">
                                         </div>
                                     </div>
 
                                     <div class="col-12 col-sm-6">
                                         
                                         <div class="form-group">
-                                            <label>Class Id</label>
+                                            <label>Class Id<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                             <select id="ClassId" class="form-control">
                                                 <?php foreach ($resultclass as $class) : ?>
                                                     <option><?=$class['Id'] ?> - <?=$class['Name'] ?></option>
@@ -72,7 +72,7 @@ include pathof("./includes/sidebar.php");
                                     </div>
                                     <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                            <label>Subject</label>
+                                            <label>Subject<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                             
                                             <select id="Subject" class="form-control">
                                                 <?php foreach ($resultSubject as $subject) : ?>
@@ -86,13 +86,13 @@ include pathof("./includes/sidebar.php");
 
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
-                                            <label>Address</label>
+                                            <label>Address<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                             <input type="text" class="form-control" id="Address">
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
-                                            <label>Password</label>
+                                            <label>Password<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                             <input type="text" class="form-control" id="Password">
                                         </div>
                                     </div>
@@ -110,7 +110,7 @@ include pathof("./includes/sidebar.php");
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
-                                            <label>LastDegree</label>
+                                            <label>LastDegree<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                             <input type="text" class="form-control" id="LastDegree">
                                         </div>
                                     </div>
@@ -122,7 +122,7 @@ include pathof("./includes/sidebar.php");
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
-                                            <label>Salary</label>
+                                            <label>Salary<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                             <input type="number" class="form-control" id="Salary">
                                         </div>
                                     </div>
@@ -159,7 +159,7 @@ include pathof("./includes/sidebar.php");
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="successModalLabel"><h5 class="text-success">Success</h5></h5>
+        <h5 class="modal-title" id="successModalLabel"><h4 class="text-success">Success</h4></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         </button>
       </div>

@@ -38,13 +38,13 @@ $resultclass = select($queryclass);
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Subject Name</label>
+                                        <label>Subject Name<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="text" autofocus id="Name" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Class Id</label>
+                                        <label>Class Id<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <select id="ClassId" class="form-control">
                                                 <?php foreach ($resultclass as $class) : ?>
                                                     <option><?=$class['Id'] ?> - <?=$class['Name'] ?></option>
@@ -73,7 +73,7 @@ $resultclass = select($queryclass);
       <div class="modal-header">
         <h5 class="modal-title" id="errorModalLabel"><h4 class="text-danger">Warning</h4></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          
         </button>
       </div>
       <div class="modal-body">
@@ -87,9 +87,9 @@ $resultclass = select($queryclass);
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="successModalLabel"><h5 class="text-success">Success</h5></h5>
+        <h5 class="modal-title" id="successModalLabel"><h4 class="text-success">Success</h4></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          
         </button>
       </div>
       <div class="modal-body">

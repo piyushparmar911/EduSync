@@ -26,7 +26,7 @@ $data = select($query);
             </div>
             <?php if ($permissions['AddPermission'] == 1) { ?>
                <div class="col-auto text-right float-right ml-auto">
-                  <a href="add-class.php" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                  <a href="add-class.php" class="btn btn-primary"><i class="fas fa-plus" accesskey="+"></i></a>
                </div>
             <?php } ?>
          </div>

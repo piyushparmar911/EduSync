@@ -38,7 +38,7 @@ $resultUser = select($queryUser);
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Head of Event(UserId)</label>
+                                        <label>Head of Event(UserId)<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <select id="UserId" class="form-control">
                                                 <?php foreach ($resultUser as $user) : ?>
                                                     <option><?=$user['Id'] ?> - <?=$user['Name'] ?></option>
@@ -50,19 +50,19 @@ $resultUser = select($queryUser);
                                 
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Event Name</label>
+                                        <label>Event Name<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="text" id="Name" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Event Start Date</label>
+                                        <label>Event Start Date<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="date" id="DateTime" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Place of Event</label>
+                                        <label>Place of Event<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="text" id="Place" class="form-control">
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@ $resultUser = select($queryUser);
       <div class="modal-header">
         <h5 class="modal-title" id="errorModalLabel"><h4 class="text-danger">Warning</h4></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          
         </button>
       </div>
       <div class="modal-body">
@@ -100,9 +100,9 @@ $resultUser = select($queryUser);
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="successModalLabel"><h5 class="text-success">Success</h5></h5>
+        <h5 class="modal-title" id="successModalLabel"><h4 class="text-success">Success</h4></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          
         </button>
       </div>
       <div class="modal-body">

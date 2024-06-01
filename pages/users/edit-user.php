@@ -52,7 +52,7 @@ $data = selectOne($query);
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Role ID</label>
+                                        <label>Role ID<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <select id="RoleId" class="form-control">
                                             <?php foreach ($resultrole as $role) : ?>
                                                 <option value="<?= $role['Id'] ?>"><?= $role['Id'] ?> - <?= $role['Name'] ?></option>
@@ -62,13 +62,13 @@ $data = selectOne($query);
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Name</label>
+                                        <label>Name<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="text" class="form-control" id="Name" value="<?= $data['Name'] ?>">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Class ID</label>
+                                        <label>Class ID<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <select id="ClassId" class="form-control">
                                             <?php foreach ($resultclass as $class) : ?>
                                                 <option value="<?= $class['Id'] ?>"><?= $class['Id'] ?> - <?= $class['Name'] ?></option>
@@ -78,7 +78,7 @@ $data = selectOne($query);
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Subject</label>
+                                        <label>Subject<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <select id="Subject" class="form-control">
                                             <?php foreach ($resultSubject as $subject) : ?>
                                                 <option value="<?= $subject['Id'] ?>"><?= $subject['Id'] ?> - <?= $subject['Name'] ?></option>
@@ -88,13 +88,13 @@ $data = selectOne($query);
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Address</label>
+                                        <label>Address<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="text" class="form-control" id="Address" value="<?= $data['Address'] ?>">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Password</label>
+                                        <label>Password<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="text" class="form-control" id="Password" value="<?= $data['Password'] ?>">
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@ $data = selectOne($query);
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Last Degree</label>
+                                        <label>Last Degree<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="text" class="form-control" id="LastDegree" value="<?= $data['LastDegree'] ?>">
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@ $data = selectOne($query);
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Salary</label>
+                                        <label>Salary<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="number" class="form-control" id="Salary" value="<?= $data['Salary'] ?>">
                                     </div>
                                 </div>
@@ -146,7 +146,7 @@ $data = selectOne($query);
       <div class="modal-header">
         <h5 class="modal-title" id="errorModalLabel"><h4 class="text-danger">Warning</h4></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          
         </button>
       </div>
       <div class="modal-body">
@@ -160,9 +160,9 @@ $data = selectOne($query);
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="successModalLabel"><h5 class="text-success">Success</h5></h5>
+        <h5 class="modal-title" id="successModalLabel"><h4 class="text-success">Success</h4></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          
         </button>
       </div>
       <div class="modal-body">
