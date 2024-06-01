@@ -3,7 +3,7 @@ require("../../includes/init.php");
 $UserId = $_SESSION['UserId'];
 $permissions = authenticate('Roles', $UserId);
 $query = "SELECT * FROM roles";
-$roles = select($query);
+$rows = select($query);
 $index = 0;
 include pathOf("./includes/header.php");
 include pathOf("./includes/sidebar.php");
@@ -49,17 +49,17 @@ include pathOf("./includes/sidebar.php");
                                 </thead>
                                 <tbody>
                                 <?php if ($permissions['ViewPermission'] == 1) {
-                                    foreach ($roles as $role): ?>
+                                    foreach ($rows as $row): ?>
                                         <tr>
                                             <td><?= $index += 1 ?></td>
                                             <td>
-                                                <h2><a><?= $role['Name'] ?></a></h2>
+                                                <h2><a><?= $row['Name'] ?></a></h2>
                                             </td>
                                             <?php if ($permissions['EditPermission'] == 1) { ?>
 
                                             <form action="./edit-role" method="post">
                                                             <td>
-                                                                <input type="hidden" name="id" id="Id" value="<?= $role['Id'] ?>">
+                                                                <input type="hidden" name="id" id="Id" value="<?= $row['Id'] ?>">
                                                                 <button type="submit" class="btn btn-info btn-circle mb-2">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
@@ -67,18 +67,35 @@ include pathOf("./includes/sidebar.php");
                                                         </form>
                                                     <?php } ?>
 
-                                                    <?php if ($permissions['DeletePermission'] == 1) { ?>
+                                                    
 
                                                 <td>
-                                                    <button type="submit" class="btn btn-primary btn-circle mb-2"
-                                                        onclick="deleteRole(<?= $role['Id'] ?>)">
-                                                        <i class="fas fa-trash"></i>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal<?= $row['Id'] ?>">
+                                                        <i class="fa fa-trash"></i>
                                                     </button>
-                                                </td>
-                                                <?php } ?>
-                                                </tr>
-                                                <?php endforeach;
-                                        } ?>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="deleteModal<?= $row['Id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="modalTitle<?= $row['Id'] ?>">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Are you sure you want to delete this role?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <?php if ($permissions['DeletePermission'] == 1) { ?>
+                                                                        <button type="button" class="btn btn-danger" onclick="deleteRole(<?= $row['Id'] ?>)" autofocus>Delete</button>
+                                                                    <?php } ?>
+                                            </tr>
+                                    <?php endforeach;
+                                    } ?>
+
                                 </tbody>
                             </table>
                         </div>
@@ -90,7 +107,7 @@ include pathOf("./includes/sidebar.php");
 <script>
     function deleteRole(roleId)
     {
-        if(confirm("are you sure you want to delete this role"));
+        
         $.ajax({
             url: "../../api/roles/deleteRoles.php",
             method : "POST",
