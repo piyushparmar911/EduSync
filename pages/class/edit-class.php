@@ -78,6 +78,22 @@ include pathof("./includes/sidebar.php");
     </div>
 </div>
 </div>
+<!-- Sucess modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Success</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Class added successfully!
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
     function updatedata(event) {
@@ -102,16 +118,22 @@ include pathof("./includes/sidebar.php");
                 TotalStudents: TotalStudents
             },
             success: function(response) {
-                console.log(response);
-                if (!response)
-                    alert("Role not updated");
-
-                else
-                    alert("class updated successfully");
-                window.location.href = 'class-list.php';
+            console.log(response); 
+            if (response.error) {
+                alert("Error: " + response.message); 
+            } else {
+                $('#successModal').modal('show');
+                setTimeout(function() {
+                    $('#successModal').modal('hide');
+                    redirectToClassList(); 
+                }, 1000);
             }
-        });
-    }
+        }
+    });
+}
+
+function redirectToClassList() {
+    window.location.href = 'class-list.php';    }
 </script>
 
 <?php
