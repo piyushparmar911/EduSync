@@ -125,7 +125,7 @@ include pathof("./includes/sidebar.php");
         $('#errorModal').modal('show');
         setTimeout(function() {
             $('#errorModal').modal('hide');
-        }, 1000);
+        }, 1500);
         return;
     }  
 
@@ -148,7 +148,7 @@ include pathof("./includes/sidebar.php");
                 setTimeout(function() {
                     $('#successModal').modal('hide');
                     redirectToClassList(); 
-                }, 1000);
+                }, 1500);
             }
         }
     });

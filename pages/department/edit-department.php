@@ -139,7 +139,7 @@ $data = selectOne($query);
         $('#errorModal').modal('show');
         setTimeout(function() {
             $('#errorModal').modal('hide');
-        }, 1000);
+        }, 1500);
         return;
     }
         $.ajax({
@@ -161,7 +161,7 @@ $data = selectOne($query);
                 setTimeout(function() {
                     $('#successModal').modal('hide');
                     redirectToClassList(); 
-                }, 1000);
+                }, 1500);
             }
         }
     });
