@@ -82,14 +82,30 @@ $data = select($query);
                                                          </form>
                                                         </td>
                                                     <?php } ?>
-                                                    <?php if ($permissions['DeletePermission'] == 1) { ?>
+                                                    
                                                     <td>
-                                                        <button type="submit" class="btn ml-1 btn-primary btn-circle mb-2"
-                                                            onclick="deleteDepartment(<?= $row['Id'] ?>)">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
-                                                    <!-- </td> -->
-                                                    <?php } ?>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal<?=$row['Id']?>">
+                                             <i class="fa fa-trash"></i>
+                                          </button>
+
+                                          <!-- Modal -->
+                                          <div class="modal fade" id="deleteModal<?= $row['Id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                             <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                   <div class="modal-header">
+                                                      <h5 class="modal-title" id="modalTitle<?= $row['Id'] ?>">Confirmation</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                         <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                   </div>
+                                                   <div class="modal-body">
+                                                      Are you sure you want to delete this class?
+                                                   </div>
+                                                   <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                      <?php if ($permissions['DeletePermission'] == 1) { ?>
+                                                      <button type="button" class="btn btn-danger" onclick="deleteDepartment(<?= $row['Id'] ?>)" autofocus>Delete</button>
+                                                      <?php } ?>
                                                 </tr>
                                             <?php endforeach;
                                         } ?>
@@ -107,7 +123,7 @@ $data = select($query);
     <script>
     function deleteDepartment(Id)
     {
-        if(confirm("are you sure you want to delete this role"));
+        
         $.ajax({
             url: "../../api/departments/deleteDepartment.php",
             method : "POST",

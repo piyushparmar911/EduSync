@@ -78,6 +78,22 @@ include pathof("./includes/sidebar.php");
     </div>
 </div>
 </div>
+<!-- warning Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel"><h4 class="text-danger">Warning</h4></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Please fill the all fields.
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Sucess modal -->
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -89,7 +105,7 @@ include pathof("./includes/sidebar.php");
         </button>
       </div>
       <div class="modal-body">
-        Class added successfully!
+        Class updated successfully!
       </div>
     </div>
   </div>
@@ -105,7 +121,13 @@ include pathof("./includes/sidebar.php");
         let Girls = $('#Girls').val();
         let TotalStudents = $('#TotalStudents').val();
 
-        
+       if (!Name.trim() || !Boys.trim() || !Girls.trim() || !TotalStudents.trim()) {
+        $('#errorModal').modal('show');
+        setTimeout(function() {
+            $('#errorModal').modal('hide');
+        }, 1000);
+        return;
+    }  
 
         $.ajax({
             url: '../../api/class/updateClass.php',

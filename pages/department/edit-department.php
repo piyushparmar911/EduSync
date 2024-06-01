@@ -88,8 +88,42 @@ $data = selectOne($query);
         </div>
     </div>
 </div>
-
 </div>
+
+<!-- Sucess modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Success</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Department updated successfully!
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- warning Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel"><h4 class="text-danger">Warning</h4></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Please fill the all fields.
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
     function updatedata(event) {
         event.preventDefault();
@@ -101,11 +135,13 @@ $data = selectOne($query);
         let NoOfStudent = $('#NoOfStudent').val();
 
 
-        if (!Name.trim()) {
-            alert("Please enter module name first.");
-            return;
-        }
-
+        if (!Name.trim() || !UserId.trim() || !StartedYear.trim() || !NoOfStudent.trim()) {
+        $('#errorModal').modal('show');
+        setTimeout(function() {
+            $('#errorModal').modal('hide');
+        }, 1000);
+        return;
+    }
         $.ajax({
             url: '../../api/departments/updateDepartment.php',
             type: 'POST',
@@ -117,15 +153,22 @@ $data = selectOne($query);
                 NoOfStudent: NoOfStudent
             },
             success: function(response) {
-                console.log(response);
-                if (!response)
-                    alert("Department not updated successfully");
-                else
-                    alert("Department updated successfully");
-                    window.location.href = 'departments-list.php';
+            console.log(response); 
+            if (response.error) {
+                alert("Error: " + response.message); 
+            } else {
+                $('#successModal').modal('show');
+                setTimeout(function() {
+                    $('#successModal').modal('hide');
+                    redirectToClassList(); 
+                }, 1000);
             }
-        });
-    }
+        }
+    });
+}
+
+function redirectToClassList() {
+    window.location.href = 'departments-list.php';    }
 </script>
 
 
