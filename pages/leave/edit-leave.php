@@ -87,9 +87,42 @@ $data = selectOne($query);
         </div>
     </div>
 </div>
-
 </div>
 
+ 
+<!-- Sucess modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Success</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        leave updated successfully!
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- warning Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel"><h4 class="text-danger">Warning</h4></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Please fill the all fields.
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <script>
@@ -102,7 +135,13 @@ $data = selectOne($query);
         let DateEnd = $('#DateEnd').val();
         let Reason = $('#Reason').val();
 
-
+        if (!DateStart.trim() || !UserId.trim() || !DateEnd.trim() || !Reason.trim()) {
+        $('#errorModal').modal('show');
+        setTimeout(function() {
+            $('#errorModal').modal('hide');
+        }, 1500);
+        return;
+    }
 
         $.ajax({
             url: '../../api/leaves/updateleave.php',
@@ -115,14 +154,22 @@ $data = selectOne($query);
                 Reason: Reason
             },
             success: function(response) {
-                console.log(response);
-                if (!response)
-                    alert("Event not update successfully");
-                else
-                    alert("Event update successfully");
-                    window.location.href = 'leave-list.php';
+                console.log(response); 
+                if (response.error) {
+                    alert("Error: " + response.message); 
+                } else {
+                    $('#successModal').modal('show');
+                    setTimeout(function() {
+                        $('#successModal').modal('hide');
+                        redirectToClassList(); 
+                    }, 1500);
+                }
             }
         });
+    }
+
+function redirectToClassList() {
+    window.location.href = 'leave-list.php';
     }
     </script>
 
