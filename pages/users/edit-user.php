@@ -139,6 +139,38 @@ $data = selectOne($query);
         </div>
     </div>
 </div>
+<!-- warning Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel"><h4 class="text-danger">Warning</h4></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Please fill the all fields.
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel"><h5 class="text-success">Success</h5></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        User updated successfully!
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 function updatedata(event) {
@@ -157,8 +189,11 @@ function updatedata(event) {
     let LastWork = $('#LastWork').val(); 
     let Salary = $('#Salary').val(); 
 
-    if (!Name.trim()) {
-        alert("Please enter the name first.");
+    if (!Name.trim() || !RoleId.trim() || !ClassId.trim() || !Subject.trim() || !Address.trim() || !Password.trim() || !LastDegree.trim() ||  !Salary.trim()){
+        $('#errorModal').modal('show');
+        setTimeout(function() {
+            $('#errorModal').modal('hide');
+        }, 1500);
         return;
     }
 
@@ -180,15 +215,23 @@ function updatedata(event) {
             Salary: Salary
         },
         success: function(response) {
-            console.log(response);
-            if (!response)
-                alert("User not updated");
-            else
-                alert("User updated successfully");
-                window.location.href = 'user-list.php';
-        }
-    });
-}
+                console.log(response); 
+                if (response.error) {
+                    alert("Error: " + response.message); 
+                } else {
+                    $('#successModal').modal('show');
+                    setTimeout(function() {
+                        $('#successModal').modal('hide');
+                        redirectToClassList(); 
+                    }, 1500);
+                }
+            }
+        });
+    }
+
+function redirectToClassList() {
+    window.location.href = 'user-list.php';
+    }
 </script>
 
 <?php

@@ -127,7 +127,7 @@ include pathof("./includes/sidebar.php");
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-primary" onclick="updatedata(event)">Submit</button>
+                                        <button type="button" class="btn btn-primary" onclick="updatedata(event)">Submit</button>
                                     </div>
                                 </div>
                             </form>
@@ -137,7 +137,37 @@ include pathof("./includes/sidebar.php");
             </div>
     </div>
 </div>
+</div>
 
+<!-- warning Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel"><h4 class="text-danger">Warning</h4></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+        Please fill the all fields.
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel"><h5 class="text-success">Success</h5></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+        User added successfully!
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -156,10 +186,14 @@ include pathof("./includes/sidebar.php");
             let LastWork = $('#LastWork').val(); 
             let Salary = $('#Salary').val(); 
 
-            if (!Name.trim()) {
-                alert("Please enter module name first.");
-                return;
-            }
+
+      if (!Name.trim() || !RoleId.trim() || !ClassId.trim() || !Subject.trim() || !Address.trim() || !Password.trim() || !LastDegree.trim() ||  !Salary.trim()){
+        $('#errorModal').modal('show');
+        setTimeout(function() {
+            $('#errorModal').modal('hide');
+        }, 1500);
+        return;
+    }
 
             $.ajax({
                 url: '../../api/users/insertUser.php',
@@ -179,16 +213,23 @@ include pathof("./includes/sidebar.php");
                     
                 },
                 success: function(response) {
-                    console.log(response);
-                    if (!response)
-                        alert("Role not updated");
-
-                    else
-                        alert("user updated successfully");
-                    window.location.href = 'user-list.php';
+                console.log(response); 
+                if (response.error) {
+                    alert("Error: " + response.message); 
+                } else {
+                    $('#successModal').modal('show');
+                    setTimeout(function() {
+                        $('#successModal').modal('hide');
+                        redirectToClassList(); 
+                    }, 1500);
                 }
-            });
-        }
+            }
+        });
+    }
+
+function redirectToClassList() {
+    window.location.href = 'user-list.php';
+    }
     </script>
 
 <?php

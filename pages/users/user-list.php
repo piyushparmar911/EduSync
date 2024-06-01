@@ -26,7 +26,7 @@ include pathof("./includes/sidebar.php");
                 </div>
                 <?php if ($permissions['AddPermission'] == 1) { ?>
                 <div class="col-auto text-right float-right ml-auto">
-                    <a href="<?= "add-user.php" ?>" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                    <a href="<?= "add-user.php" ?>" class="btn btn-primary"><i class="fas fa-plus" accesskey="+"></i></a>
                 </div>
                 <?php } ?>
             </div>
@@ -71,7 +71,7 @@ include pathof("./includes/sidebar.php");
                                                             <td>
                                                                 <input type="hidden" name="Id" id="Id" value="<?= $row['Id'] ?>">
                                                                 <button type="submit" class="btn ml-3 btn-secondary btn-circle mb-2">
-                                                                    <i class="fa fa-lock"></i>
+                                                                    <i class="fa fa-lock" accesskey="p"></i>
                                                                 </button>
                                                             </td>
                                                         </form>
@@ -82,7 +82,7 @@ include pathof("./includes/sidebar.php");
                                                             <td>
                                                                 <input type="hidden" name="Id" value="<?= $row['Id'] ?>">
                                                                 <button type="submit" class="btn ml-2 btn-primary btn-circle mb-2">
-                                                                    <i class="fa fa-edit"></i>
+                                                                    <i class="fa fa-edit" accesskey="m"></i>
                                                                 </button>
                                                             </td>
                                                         </form>
