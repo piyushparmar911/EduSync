@@ -1,4 +1,3 @@
-
 <?php
 
 define("BASE_DIR", $_SERVER['DOCUMENT_ROOT'] . "/EduSync");
@@ -6,7 +5,12 @@ define("BASE_URL", "/EduSync");
 
 date_default_timezone_set('Asia/Kolkata');
 
-$connection = new PDO("mysql:host=localhost;port=3306;dbname=EduSync", "root", "");
+try {
+    $connection = new PDO("mysql:host=localhost;port=3306;dbname=EduSync", "root", "");
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
 
 function pathOf($path)
 {
@@ -71,3 +75,4 @@ function authenticate($moduleName, $userId)
 }
 
 session_start();
+?>

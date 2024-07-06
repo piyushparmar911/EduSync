@@ -74,10 +74,12 @@ $data = select($query);
 
                                                
                                              
-                                           <td>
+                                               <td>
+                                              <?php if ($permissions['DeletePermission'] == 1) { ?>
                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal<?= $row['Id'] ?>">
                                                         <i class="fa fa-trash" ></i>
-                                                    </button>
+                                                      </button>
+                                                      <?php } ?>
 
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="deleteModal<?= $row['Id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -94,9 +96,7 @@ $data = select($query);
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <?php if ($permissions['DeletePermission'] == 1) { ?>
                                                                         <button type="button" class="btn btn-danger" onclick="deleteSubject(<?= $row['Id'] ?>)" >Delete</button>
-                                                                    <?php } ?>
                                             </tr>
                                     <?php endforeach;
                                     } ?>

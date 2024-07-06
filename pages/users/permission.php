@@ -2,8 +2,8 @@
 require("../../includes/init.php");
 
 // Check user permissions (uncomment if needed)
-// // if ($userPermission['AddPermission'] != 1)
-// //     header("Location:./index");
+// if ($userPermission['AddPermission'] != 1)
+//     header("Location:./index");
 
 $userPermissionId = $_POST['Id'];
 $permissions = select("SELECT Modules.Name AS 'ModuleName', Modules.Id, Users.Name, Permissions.AddPermission, Permissions.EditPermission, Permissions.DeletePermission, Permissions.ViewPermission FROM Permissions INNER JOIN Modules ON Permissions.ModuleId = Modules.Id INNER JOIN Users ON Permissions.UserId = Users.Id WHERE Permissions.UserId =?", [$userPermissionId]);
@@ -44,14 +44,13 @@ include pathOf("./includes/sidebar.php");
                                             <th>Edit Permission</th>
                                             <th>View Permission</th>
                                             <th>Delete Permission</th>
-                                            <th>Check All</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($permissions as $permission): ?>
                                             <tr>
                                                 <input type="hidden" value="<?= $userPermissionId ?>" id="UserId">
-                                                <td><?= $index += 1 ?></td>
+                                                <td><?= ++$index ?></td>
                                                 <td><?= $permission['ModuleName'] ?></td>
                                                 <td>
                                                     <div class="form-check">
@@ -83,13 +82,6 @@ include pathOf("./includes/sidebar.php");
                                                                <?= $permission['DeletePermission'] == 1 ? 'checked' : '' ?>
                                                                onchange="updatePermission('deletePermission', <?= $permission['Id'] ?>, <?= $permission['DeletePermission'] ?>)">
                                                         <label class="form-check-label" for="deletePermission<?= $permission['Id'] ?>"></label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input checkAllRow" type="checkbox" id="checkAllRow<?= $permission['Id'] ?>"
-                                                               onchange="toggleRowPermissions(<?= $permission['Id'] ?>, this)">
-                                                        <label class="form-check-label" for="checkAllRow<?= $permission['Id'] ?>"></label>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -124,22 +116,7 @@ include pathOf("./includes/sidebar.php");
                     return;
 
                 // Optionally, update the checkbox state without reloading
-                document.getElementById(action + moduleId).checked = newPermission == 1;
-            });
-        }
-
-        function toggleRowPermissions(moduleId, checkbox) {
-            let checkState = checkbox.checked;
-            let permissions = ['addPermission', 'editPermission', 'viewPermission', 'deletePermission'];
-
-            permissions.forEach(permission => {
-                let permissionCheckbox = document.getElementById(permission + moduleId);
-                if (permissionCheckbox) {
-                    permissionCheckbox.checked = checkState;
-
-                    // Trigger the onchange event to update the permission
-                    updatePermission(permission, moduleId, checkState ? 0 : 1);
-                }
+                 window.location.reload();
             });
         }
     </script>
