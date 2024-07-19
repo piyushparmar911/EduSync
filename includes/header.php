@@ -15,7 +15,7 @@ if (!isset($_SESSION['LoggedIn'])) {
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-      <title>EduSync</title>
+      <title>FacultyZone</title>
       <link rel="shortcut icon" href="<?=urlOf("assets/img/logo1.png")?>">
       <link rel="stylesheet" href="<?=urlOf("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap")?>">
       <link rel="stylesheet" href="<?=urlOf("assets/plugins/bootstrap/css/bootstrap.min.css")?>">
@@ -29,10 +29,9 @@ if (!isset($_SESSION['LoggedIn'])) {
       <div class="main-wrapper">
          <div class="header">
             <div class="header-left">
-               <a class="logo mb-2 ml-0">
-               <img src="<?=urlOf("assets/img/logo1.png")?>" alt="Logo">
+               <a class="logo m-2  mt-2">
+               <img src="<?=urlOf("assets/img/logo1.png")?>" alt="Logo" width="300" height="300" >
             </a>
-            <span class="h2 text-dark">EduSync</span>
                <a href="index.html" class="logo logo-small">
                <img src="<?=urlOf("assets/img/logo-small.png")?>" alt="Logo" width="30" height="30">
                </a>

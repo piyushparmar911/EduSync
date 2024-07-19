@@ -6,7 +6,7 @@ $query = "SELECT * FROM roles";
 $rows = select($query);
 $index = 0;
 include pathOf("./includes/header.php");
-include pathOf("./includes/sidebar.php");
+include pathof("./includes/sidebar.php");
 
 ?>
 
