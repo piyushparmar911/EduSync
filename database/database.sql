@@ -64,7 +64,8 @@ CREATE TABLE
         `Name` VARCHAR(255) NOT NULL,
         `Boys` INT NOT NULL,
         `Girls` INT NOT NULL,
-        `TotalStudents` INT NOT NULL
+        `TotalStudents` INT NOT NULL,
+        FOREIGN KEY (`Id`) REFERENCES `Departments` (`Id`)
     );
 
 CREATE TABLE

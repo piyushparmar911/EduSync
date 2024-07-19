@@ -8,6 +8,10 @@ if ($permissions['AddPermission'] != 1)
 
 include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
+
+$query  = "SELECT `Id`,`Name` FROM `departments`";
+
+$departments = select($query);
 ?>
 
 
@@ -34,6 +38,17 @@ include pathof("./includes/sidebar.php");
                             <div class="col-12">
                                 <h5 class="form-title"><span>Class Information</span></h5>
                             </div>
+                            <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Department<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
+                                        <select id="Id" class="form-control">
+                                                <?php foreach ($departments as $class) : ?>
+                                                    <option><?=$class['Id'] ?> - <?=$class['Name'] ?></option>
+                                                    <?= $class['Id'] , $class['Name'] ?>
+                                                <?php endforeach; ?>
+                                            </select>
+                                    </div>
+                                </div>
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label>Class Name<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
@@ -106,6 +121,7 @@ include pathof("./includes/sidebar.php");
 
 <script>
     function insert() {
+    let Id = $('#Id').val();
     let Name = $('#Name').val();
     let Boys = $('#Boys').val();
     let Girls = $('#Girls').val();
@@ -127,7 +143,8 @@ include pathof("./includes/sidebar.php");
             Name: Name,
             Boys: Boys,
             Girls: Girls,
-            TotalStudent: TotalStudent
+            TotalStudent: TotalStudent,
+            Id: Id
         },
         success: function(response) {
             console.log(response); 

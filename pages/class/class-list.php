@@ -42,6 +42,7 @@ $data = select($query);
                               <th>Sr No</th>
                               <th>Name</th>
                               <th>Boys</th>
+                              <th>DepartmentsId</th>
                               <th>Girls</th>
                               <th>TotalStudents</th>
                               <?php if ($permissions['EditPermission'] == 1) { ?>
@@ -63,6 +64,7 @@ $data = select($query);
                                        </h2>
                                     </td>
                                     <td><?= $row['Boys'] ?></td>
+                                    <td><?= $row['Id'] ?></td>
                                     <td><?= $row['Girls'] ?></td>
                                     <td><?= $row['TotalStudents'] ?></td>
                                     <!-- <td class="text-left"> -->
