@@ -10,6 +10,25 @@ $query = "
 ";
 $queryu= select("SELECT * from `users`");
 
+$usercount = "SELECT COUNT(id) as UserCount FROM `users` ";
+$uc = select($usercount);
+$userc = $uc[0]['UserCount'];
+
+
+$subjects = "SELECT COUNT(id) as Subjectcount FROM `subjects` ";
+$sc = select($subjects);
+$subjectc = $sc[0]['Subjectcount'];
+
+
+$departments = "SELECT COUNT(id) as departmentcount FROM `departments` ";
+$dc = select($departments);
+$departmentc = $dc[0]['departmentcount'];
+
+
+$events = "SELECT COUNT(id) as eventcount FROM `event` ";
+$ec = select($events);
+$eventc = $ec[0]['eventcount'];
+
 $data = select($query);
 
 $logginuser = isset($_SESSION['UserName'])? $_SESSION['UserName'] : "Admin";
@@ -38,7 +57,7 @@ $logginuser = isset($_SESSION['UserName'])? $_SESSION['UserName'] : "Admin";
                                  <i class="fas fa-user-graduate"></i>
                               </div>
                               <div class="db-info">
-                                 <h3>500</h3>
+                                 <h3><?= $userc?></h3>
                                  <h6>Users</h6>
                               </div>
                            </div>
@@ -53,8 +72,8 @@ $logginuser = isset($_SESSION['UserName'])? $_SESSION['UserName'] : "Admin";
                                  <i class="fas fa-crown"></i>
                               </div>
                               <div class="db-info">
-                                 <h3>50+</h3>
-                                 <h6>Awards</h6>
+                                 <h3><?=$subjectc?></h3>
+                                 <h6>Subjects</h6>
                               </div>
                            </div>
                         </div>
@@ -68,7 +87,7 @@ $logginuser = isset($_SESSION['UserName'])? $_SESSION['UserName'] : "Admin";
                                  <i class="fas fa-building"></i>
                               </div>
                               <div class="db-info">
-                                 <h3>30+</h3>
+                                 <h3><?=$departmentc?></h3>
                                  <h6>Department</h6>
                               </div>
                            </div>
@@ -83,7 +102,7 @@ $logginuser = isset($_SESSION['UserName'])? $_SESSION['UserName'] : "Admin";
                                  <i class="fas fa-calendar-day"></i>
                               </div>
                               <div class="db-info">
-                                 <h3>05</h3>
+                                 <h3><?=$eventc ?></h3>
                                  <h6>Events</h6>
                               </div>
                            </div>
