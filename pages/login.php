@@ -45,6 +45,9 @@ require ('../includes/init.php');
                                     <button class="btn btn-primary btn-lg w-100" type="button" onclick="sendData()">Sign
                                         In</button>
                                 </div>
+                                <div>
+                                    <a href="<?= urlOf('pages/resetpassword.php')?>">Forget password</a>
+                                </div>
                             </div>
                         </div>
                     </div>

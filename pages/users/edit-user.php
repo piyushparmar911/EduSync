@@ -94,6 +94,12 @@ $data = selectOne($query);
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
+                                        <label>Email<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
+                                        <input type="text" class="form-control" id="Email" value="<?= $data['Email'] ?>">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
                                         <label>Password<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                         <input type="text" class="form-control" id="Password" value="<?= $data['Password'] ?>">
                                     </div>
@@ -183,13 +189,14 @@ function updatedata(event) {
     let Subject = $('#Subject').val(); 
     let Address = $('#Address').val(); 
     let Password = $('#Password').val(); 
+    let Email = $('#Email').val();
     let Experience = $('#Experience').val(); 
     let ExperienceGain = $('#ExperienceGain').val(); 
     let LastDegree = $('#LastDegree').val(); 
     let LastWork = $('#LastWork').val(); 
     let Salary = $('#Salary').val(); 
 
-    if (!Name.trim() || !RoleId.trim() || !ClassId.trim() || !Subject.trim() || !Address.trim() || !Password.trim() || !LastDegree.trim() ||  !Salary.trim()){
+    if (!Name.trim() || !RoleId.trim() || !ClassId.trim() || !Subject.trim() || !Address.trim() ||!Email.trim() || !Password.trim() || !LastDegree.trim() ||  !Salary.trim()){
         $('#errorModal').modal('show');
         setTimeout(function() {
             $('#errorModal').modal('hide');
@@ -207,6 +214,7 @@ function updatedata(event) {
             ClassId: ClassId,
             Subject: Subject,
             Address: Address,
+            Email: Email,
             Password: Password,
             Experience: Experience,
             ExperienceGain: ExperienceGain,

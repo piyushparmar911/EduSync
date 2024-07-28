@@ -92,6 +92,12 @@ include pathof("./includes/sidebar.php");
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
+                                            <label>Email<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
+                                            <input type="Email" class="form-control" id="Email">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
                                             <label>Password<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
                                             <input type="text" class="form-control" id="Password">
                                         </div>
@@ -179,6 +185,7 @@ include pathof("./includes/sidebar.php");
             let ClassId = $('#ClassId').val(); 
             let Subject = $('#Subject').val(); 
             let Address = $('#Address').val(); 
+            let Email = $('#Email').val(); 
             let Password = $('#Password').val(); 
             let Experience = $('#Experience').val(); 
             let ExperienceGain = $('#ExperienceGain').val(); 
@@ -187,7 +194,7 @@ include pathof("./includes/sidebar.php");
             let Salary = $('#Salary').val(); 
 
 
-      if (!Name.trim() || !RoleId.trim() || !ClassId.trim() || !Subject.trim() || !Address.trim() || !Password.trim() || !LastDegree.trim() ||  !Salary.trim()){
+      if (!Name.trim() || !RoleId.trim() || !ClassId.trim() || !Subject.trim() || !Address.trim() ||!Email.trim() || !Password.trim() || !LastDegree.trim() ||  !Salary.trim()){
         $('#errorModal').modal('show');
         setTimeout(function() {
             $('#errorModal').modal('hide');
@@ -204,6 +211,7 @@ include pathof("./includes/sidebar.php");
                     ClassId: ClassId,
                     Subject: Subject,
                     Address: Address,
+                    Email: Email,
                     Password: Password,
                     Experience: Experience,
                     ExperienceGain: ExperienceGain,

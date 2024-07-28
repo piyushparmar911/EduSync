@@ -12,6 +12,7 @@ $queryu= select("SELECT * from `users`");
 
 $data = select($query);
 
+$logginuser = isset($_SESSION['UserName'])? $_SESSION['UserName'] : "Admin";
 ?>        
 
 
@@ -21,7 +22,7 @@ $data = select($query);
                <div class="page-header">
                   <div class="row">
                      <div class="col-sm-12">
-                        <h3 class="page-title">Welcome Admin!</h3>
+                        <h3 class="page-title">Welcome <?=htmlspecialchars($logginuser)?></h3>
                         <ul class="breadcrumb">
                            <li class="breadcrumb-item active">Dashboard</li>
                         </ul>

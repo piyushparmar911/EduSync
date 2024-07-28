@@ -10,6 +10,7 @@ $permissions = authenticate('Leaves', $UserId);
 $queryUser ="SELECT `Id`,`Name` FROM `users` ";
 
 $resultUser = select($queryUser);
+$logginuser = isset($_SESSION['UserName'])? $_SESSION['UserName'] : "Admin";
 ?>
 
 
@@ -40,17 +41,13 @@ $resultUser = select($queryUser);
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label>User Id<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
-                                        <select id="UserId" class="form-control">
-                                                <?php foreach ($resultUser as $user) : ?>
-                                                    <option><?=$user['Id'] ?> - <?=$user['Name'] ?></option>
-                                                    <?= $user['Id'] , $user['Name'] ?>
-                                                <?php endforeach; ?>
-                                            </select>
+                                        <input type="user" id="user" readonly value="<?= htmlspecialchars($logginuser)?>" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label>Leave Start Date<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
+                                        
                                         <input type="date" id="DateStart" class="form-control">
                                     </div>
                                 </div>

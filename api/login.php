@@ -1,5 +1,4 @@
 <?php
-
 require '../includes/init.php';
 header("Content-type:application/json");
 
@@ -14,6 +13,7 @@ if ($result) {
     echo json_encode(["success" => true]);
     $_SESSION['LoggedIn'] = true;
     $_SESSION['UserId'] = $result['Id'];
+    $_SESSION['UserName'] = $result['Name']; // Store the user's name in the session
 } else {
     echo json_encode(["success" => false]);
 }

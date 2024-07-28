@@ -10,6 +10,7 @@ $ClassId = $_POST['ClassId'];
 $Subject = $_POST['Subject'];
 $Address = $_POST['Address'];
 $Password = $_POST['Password'];
+$Email = $_POST['Email'];
 $Experience = $_POST['Experience'];
 $ExperienceGain = $_POST['ExperienceGain'];
 $LastDegree = $_POST['LastDegree'];
@@ -18,11 +19,11 @@ $Salary = $_POST['Salary'];
 
 
 
-$query = "INSERT INTO `users` (`RoleId`,`Name`,`ClassId`,`Subject`, `Address`,`Password`,`Experience`,`ExperienceGain`,`LastDegree`,`LastWork`,
-                                `Salary`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+$query = "INSERT INTO `users` (`RoleId`,`Name`,`ClassId`,`Subject`, `Address`,`Email`,`Password`,`Experience`,`ExperienceGain`,`LastDegree`,`LastWork`,
+                                `Salary`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 
-$result = execute($query,[$RoleId,$Name,$ClassId,$Subject,$Address,$Password,$Experience,$ExperienceGain, $LastDegree,$LastWork,$Salary]);
+$result = execute($query,[$RoleId,$Name,$ClassId,$Subject,$Address,$Email,$Password,$Experience,$ExperienceGain, $LastDegree,$LastWork,$Salary]);
 
 $userId = lastInsertId();
 $permissionQuery = "INSERT INTO Permissions (UserId,ModuleId,AddPermission,EditPermission,DeletePermission,ViewPermission) VALUES(?,?,?,?,?,?)";

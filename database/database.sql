@@ -24,11 +24,14 @@ CREATE TABLE
         `Subject` VARCHAR(255) NOT NULL,
         `Address` VARCHAR(255) NOT NULL,
         `Password` VARCHAR(255) NOT NULL,
+        `Email` VARCHAR(255) NOT NULL,
         `Experience` INT NOT NULL,
         `ExperienceGain` INT NOT NULL,
         `LastDegree` VARCHAR(255) NOT NULL,
         `LastWork` VARCHAR(255) NOT NULL,
         `Salary` INT NOT NULL,
+        `Token` VARCHAR(255) NOT NULL,
+        `resetToken` DATE  NULL,
         FOREIGN KEY (`ClassId`) REFERENCES `Class` (`Id`);
         FOREIGN key (`RoleId`) REFERENCES `Roles` (`Id`)
     );
@@ -128,6 +131,7 @@ INSERT INTO
         `Subject`,
         `Address`,
         `Password`,
+        `Email`
         `Experience`,
         `ExperienceGain`,
         `LastDegree`,
@@ -143,6 +147,7 @@ VALUES
         'Testing',
         'This is the testing address',
         'xyz',
+        'alishpagda08@gmail.com',
         '10',
         '5',
         'B.E',
