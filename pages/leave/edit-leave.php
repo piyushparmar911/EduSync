@@ -9,9 +9,7 @@ $UserId = $_SESSION['UserId'];
 $permissions = authenticate('Leave', $UserId);
 $Id = $_POST['id'];
 $query = "SELECT * FROM `leave` WHERE `Id` = '$Id'";
-$queryUser = "SELECT `Id`, `Name` FROM `users`";
 
-$resultUser = select($queryUser);
 $data = selectOne($query);
 ?>
 
@@ -50,12 +48,7 @@ $data = selectOne($query);
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label>User Id<i class="fa fa-asterisk fa-sm text-danger pl-2"></i></label>
-                                        <select id="UserId" class="form-control">
-                                                <?php foreach ($resultUser as $user) : ?>
-                                                    <option><?=$user['Id'] ?> - <?=$user['Name'] ?></option>
-                                                    <?= $user['Id'] , $user['Name'] ?>
-                                                <?php endforeach; ?>
-                                            </select>
+                                        <input type="text" id="UserId" class="form-control" value="<?= $UserId?>" readonly>
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">

@@ -4,14 +4,14 @@ include  pathOf("./includes/header.php");
 include pathof("./includes/sidebar.php");
 
 
-
 $UserId = $_SESSION['UserId'];
 $permissions = authenticate('Leave', $UserId);
-$query = "SELECT * FROM `leave`";
-$queryUser = "SELECT `Id`,`Name` FROM `users`";
 $index = 0;
-$dataUser = select($queryUser);
-$data = select($query);
+
+$query = "SELECT * FROM `leave` WHERE `UserId` = ?";
+$peram  = [$UserId];
+$data = select($query,$peram);
+
 ?>
 
 <link rel="stylesheet" href="<?= urlOf("assets/plugins/datatables/datatables.min.css") ?>">
